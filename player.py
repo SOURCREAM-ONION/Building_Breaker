@@ -1,11 +1,11 @@
 from pico2d import *
 
-open_canvas()
 
-running = True
+
+
 
 class Character:
-    def __init__(self, image):
+    def __init__(self):
         self.image = load_image('char1_1.png')
         self.frame = 0
         self.x, self.y = 400, 30
@@ -14,8 +14,18 @@ class Character:
     def update(self):
         self.image.clip_draw(self.frame * 30, 30, 30, 30, 400, 300, 50, 50)
 
+open_canvas()
+
 def reset_world():
-    pass
+    global running
+    global character
+
+    running = True
+    world = []
+    character = Character()
+    world.append(character)
+
+reset_world()
 
 def update_world():
     character.update()
