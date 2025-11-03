@@ -2,7 +2,7 @@ from pico2d import *
 
 open_canvas()
 
-
+running = True
 
 class Character:
     def __init__(self, image):
@@ -14,20 +14,9 @@ class Character:
     def update(self):
         self.image.clip_draw(self.frame * 30, 30, 30, 30, 400, 300, 50, 50)
 
-def reset_world():
-    global running
-    global character
-
-    running = True
-    character = Character()
-
-
-def update_world():
-    character.update()
-
-def render_world():
-    clear_canvas()
-    character.draw()
-    update_canvas()
+while running:
+    update_world()
+    render_world()
+    delay(0.1)
 
 close_canvas()
