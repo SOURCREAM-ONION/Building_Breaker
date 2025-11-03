@@ -7,10 +7,12 @@ open_canvas()
 class Character:
     def __init__(self, image):
         self.image = load_image('char1_1.png')
+        self.frame = 0
+        self.x, self.y = 400, 30
     def draw(self):
-        self.image.draw(400, 30)
+        self.frame = (self.frame + 1) % 3
     def update(self):
-        pass
+        self.image.clip_draw(self.frame * 30, 30, 30, 30, 400, 300, 50, 50)
 
 def reset_world():
     global running
