@@ -14,6 +14,8 @@ class Character:
     def update(self):
         self.image.clip_draw(self.frame * 30, 30, 30, 30, 400, 300, 50, 50)
 
+def reset_world():
+    pass
 
 def update_world():
     character.update()
