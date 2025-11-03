@@ -19,6 +19,7 @@ open_canvas()
 def reset_world():
     global running
     global character
+    global world
 
     running = True
     world = []
@@ -28,7 +29,8 @@ def reset_world():
 reset_world()
 
 def update_world():
-    character.update()
+    for game_object in world:
+        game_object.update()
 
 
 def render_world():
