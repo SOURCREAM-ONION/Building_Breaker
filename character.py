@@ -13,10 +13,10 @@ class Idle:
         pass
 
     def do(self):
-        self.character.frame = (self.character.frame + 1) % 4
+        self.character.frame = (self.character.frame + 1) % 4 # 프레임을 0~3까지 반복
 
     def draw(self):
-        self.character.image.clip_draw(self.character.frame * 30, 120, 30, 30, 400, 90)
+        self.character.image.clip_draw(self.character.frame * 32, 95, 32, 35, 400, 90, 50, 50)
 
 class Character:
     def __init__(self): # 캐릭터가 처음 생성될 때 나오는 부분
