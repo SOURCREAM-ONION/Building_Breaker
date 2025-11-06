@@ -19,8 +19,8 @@ class Idle:
         self.character.image.clip_draw(self.character.frame * 32, 95, 32, 35, 400, 90, 50, 50)
 
 class Attack:
-    def __init__ (self):
-        pass
+    def __init__ (self,character):
+        self.character = character
 
     def enter(self):
         pass
@@ -32,7 +32,10 @@ class Attack:
         pass
 
     def draw(self):
-        pass
+        self.character.image.clip_draw(128, 65, 32, 35, 400, 90, 50, 50)
+        self.character.image.clip_draw(0, 35, 32, 35, 400, 90, 50, 50)
+        self.character.image.clip_draw(32, 35, 32, 35, 400, 90, 50, 50)
+        self.character.image.clip_draw(64, 35, 32, 35, 400, 90, 50, 50)
 
 class Character:
     def __init__(self): # 캐릭터가 처음 생성될 때 나오는 부분
