@@ -18,6 +18,22 @@ class Idle:
     def draw(self):
         self.character.image.clip_draw(self.character.frame * 32, 95, 32, 35, 400, 90, 50, 50)
 
+class Defence:
+    def __init__ (self,character):
+        pass
+
+    def enter(self):
+        pass
+
+    def exit(self):
+        pass
+
+    def do(self):
+        pass
+
+    def draw(self):
+        pass
+
 class Attack:
     def __init__ (self,character):
         self.character = character
