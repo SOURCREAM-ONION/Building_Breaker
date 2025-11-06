@@ -18,6 +18,22 @@ class Idle:
     def draw(self):
         self.character.image.clip_draw(self.character.frame * 32, 95, 32, 35, 400, 90, 50, 50)
 
+class Attack:
+    def __init__ (self):
+        pass
+
+    def enter(self):
+        pass
+
+    def exit(self):
+        pass
+
+    def do(self):
+        pass
+
+    def draw(self):
+        pass
+
 class Character:
     def __init__(self): # 캐릭터가 처음 생성될 때 나오는 부분
         self.x, self.y = 400, 300 # 캐릭터의 초기 위치
