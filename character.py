@@ -41,21 +41,28 @@ class Defence:
 class Attack:
     def __init__ (self,character):
         self.character = character
+        self.frame = 0
+        self.frame_count = 4
 
     def enter(self):
-        pass
+        self.frame = 0
 
     def exit(self):
         pass
 
     def do(self):
-        pass
+        self.frame = (self.frame + 1) % self.frame_count  # 프레임을 0~3까지 반복
 
     def draw(self):
-        self.character.image.clip_draw(128, 65, 32, 35, 400, 90, 50, 50)
-        self.character.image.clip_draw(0, 35, 32, 35, 400, 90, 50, 50)
-        self.character.image.clip_draw(32, 35, 32, 35, 400, 90, 50, 50)
-        self.character.image.clip_draw(64, 35, 32, 35, 400, 90, 50, 50)
+        # 현재 프레임에 해당하는 이미지만 그리기
+        if self.frame == 0:
+            self.character.image.clip_draw(128, 65, 32, 35, 400, 90, 50, 50)
+        elif self.frame == 1:
+            self.character.image.clip_draw(0, 35, 32, 35, 400, 90, 50, 50)
+        elif self.frame == 2:
+            self.character.image.clip_draw(32, 35, 32, 35, 400, 90, 50, 50)
+        elif self.frame == 3:
+            self.character.image.clip_draw(64, 35, 32, 35, 400, 90, 50, 50)
 
 class Character:
     def __init__(self): # 캐릭터가 처음 생성될 때 나오는 부분
