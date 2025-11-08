@@ -1,5 +1,5 @@
 from pico2d import load_image
-from sdl2 import SDL_MOUSEBUTTONDOWN
+from sdl2 import SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT
 
 from state_machine import StateMachine
 
@@ -78,3 +78,5 @@ class Character:
     def draw(self):  # 캐릭터가 그려지는 부분
         self.state_machine.draw() # 상태 머신한테 draw를 맡김
 
+    def handle_event(self, event): # 이벤트가 발생했을 때 처리하는 부분
+        self.state_machine.handle_event(('INPUT', event)) # 상태 머신한테 이벤트 처리를 맡김
