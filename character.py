@@ -1,6 +1,10 @@
 from pico2d import load_image
+from sdl2 import SDL_MOUSEBUTTONDOWN
+
 from state_machine import StateMachine
 
+def mouse_left_click(e):
+    return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONDOWN and e[1].button == SDL_BUTTON_LEFT # 마우스 좌클릭
 
 class Idle:
     def __init__(self,character):
@@ -64,7 +68,7 @@ class Character:
         self.state_machine = StateMachine(
             self.IDLE,
             {
-                self.IDLE : {self.ATTACK}
+                self.IDLE : {mouse_left_click : self.ATTACK}
             }
         )
 
