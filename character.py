@@ -113,12 +113,14 @@ class Character:
         self.IDLE = Idle(self) # Idle 상태 생성
         self.ATTACK = Attack(self) # Attack 상태 생성
         self.DEFENCE = Defence(self) # Defence 상태 생성
+        self.JUMP = Jump(self) # Jump 상태 생성
         self.state_machine = StateMachine(
             self.IDLE,
             {
                 self.IDLE : {mouse_left_click : self.ATTACK, mouse_right_click : self.DEFENCE},
                 self.ATTACK : {time_out : self.IDLE},
                 self.DEFENCE : {time_out : self.IDLE},
+                self.JUMP : {time_out : self.IDLE},
             }
         )
 
