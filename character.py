@@ -52,19 +52,29 @@ class Defence:
 
 class Jump:
     def __init__ (self,character):
-        pass
+        self.character = character
+        self.frame = 0 # 점프 애니메이션 프레임 초기화
+        self.frame_count = 3 # 점프 애니메이션 프레임 수
 
     def enter(self):
-        pass
+        self.frame = 0
 
     def exit(self):
         pass
 
     def do(self):
-        pass
+        self.frame = self.frame + 1 # 프레임을 1씩 증가
+        if self.frame >= self.frame_count:
+            # 이벤트를 발생시켜 상태 전환
+            self.character.state_machine.handle_event(('TIME_OUT', None))
 
     def draw(self):
-        pass
+        if self.frame == 0: # 0번 프레임 재생
+            self.character.image.clip_draw(32, 90, 32, 35, 400, 90, 50, 50)
+        elif self.frame == 1: # 1번 프레임 재생
+            self.character.image.clip_draw(64, 90, 32, 35, 400, 90, 50, 50)
+        elif self.frame == 2: # 2번 프레임 재생
+            self.character.image.clip_draw(128, 90, 32, 35, 400, 90, 50, 50)
 
 class Attack:
     def __init__ (self,character):
