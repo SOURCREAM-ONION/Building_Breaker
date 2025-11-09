@@ -32,7 +32,7 @@ class Defence:
     def __init__ (self,character):
         self.character = character
         self.frame = 0 # 방어 애니메이션 프레임 초기화
-        self.frame_count = 2 # 방어 애니메이션 프레임 수
+        self.frame_count = 3 # 방어 애니메이션 프레임 수
 
     def enter(self):
         self.frame = 0
@@ -47,10 +47,10 @@ class Defence:
             self.character.state_machine.handle_event(('TIME_OUT', None)) # 상태 전환
 
     def draw(self):
-        if self.frame == 0: # 프레임이 0일때 재생
-            self.character.image.clip_draw(128, 90, 32, 35, 400, 90, 50, 50)
-        elif self.frame == 1: # 프레임이 1일때 재생
-            self.character.image.clip_draw(0, 60, 32, 35, 400, 90, 50, 50)
+        if self.frame == 1: # 프레임이 1일때 재생
+            self.character.image.clip_draw(128, 93, 32, 35, 400, 90, 50, 50)
+        elif self.frame == 2: # 프레임이 2일때 재생
+            self.character.image.clip_draw(0, 61, 32, 35, 400, 90, 50, 50)
 
 class Jump:
     def __init__ (self,character):
@@ -71,12 +71,12 @@ class Jump:
             self.character.state_machine.handle_event(('TIME_OUT', None))
 
     def draw(self):
-        if self.frame == 0: # 0번 프레임 재생
+        if self.frame == 1: # 0번 프레임 재생
             self.character.image.clip_draw(32, 60, 32, 35, 400, 90, 50, 50)
-        elif self.frame == 1: # 1번 프레임 재생
-            self.character.image.clip_draw(64, 60, 32, 35, 400, 90, 50, 50)
-        elif self.frame == 2: # 2번 프레임 재생
-            self.character.image.clip_draw(96, 60, 32, 35, 400, 90, 50, 50)
+        elif self.frame == 2: # 1번 프레임 재생
+            self.character.image.clip_draw(64, 61, 32, 35, 400, 90, 50, 50)
+        elif self.frame == 3: # 2번 프레임 재생
+            self.character.image.clip_draw(96, 61, 32, 35, 400, 90, 50, 50)
 
 class Attack:
     def __init__ (self,character):
