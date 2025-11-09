@@ -72,11 +72,11 @@ class Jump:
 
     def draw(self):
         if self.frame == 0: # 0번 프레임 재생
-            self.character.image.clip_draw(32, 90, 32, 35, 400, 90, 50, 50)
+            self.character.image.clip_draw(32, 60, 32, 35, 400, 90, 50, 50)
         elif self.frame == 1: # 1번 프레임 재생
-            self.character.image.clip_draw(64, 90, 32, 35, 400, 90, 50, 50)
+            self.character.image.clip_draw(64, 60, 32, 35, 400, 90, 50, 50)
         elif self.frame == 2: # 2번 프레임 재생
-            self.character.image.clip_draw(128, 90, 32, 35, 400, 90, 50, 50)
+            self.character.image.clip_draw(96, 60, 32, 35, 400, 90, 50, 50)
 
 class Attack:
     def __init__ (self,character):
