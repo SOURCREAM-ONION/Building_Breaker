@@ -1,6 +1,7 @@
 from pico2d import *
 
 from character import Character
+from sword import Sword
 
 
 def handle_events():
@@ -20,9 +21,14 @@ def reset_world(): # 월드가 새로 나올때 그려지는 부분
     global running
     global character
     global world
+    global sword
 
     running = True
     world = []
+
+    sword = Sword()
+    world.append(sword)
+
     character = Character()
     world.append(character)
 
