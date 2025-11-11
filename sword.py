@@ -24,19 +24,35 @@ class Idle_Sword:
 
 class Wield_Sword:
     def __init__(self, sword):
+        self.x, self.y = 400, 100
         self.sword = sword
+        self.frame = 0
+        self.frame_count = 6
 
     def enter(self):
-        pass
+        self.frame = 0
 
     def exit(self):
         pass
 
     def do(self):
-        pass
+        self.frame = self.frame +1
+        if self.frame >= self.frame_count:
+            self.sword.state_machine.handle_event(('TIME_OUT', None))
 
     def draw(self):
-        self. sword.image.clip_draw(0, 0, 122, 122, self.sword.x, self.sword.y, 50, 50)
+        if self.frame == 1:
+            self. sword.image.clip_draw(0, 0, 122, 122, self.x, self.y, 50, 50)
+        if self.frame == 2:
+            self. sword.image.clip_draw(204, 0, 204, 122, self.x, self.y, 50, 50)
+        if self.frame == 3:
+            self. sword.image.clip_draw(408, 0, 204, 122, self.x, self.y, 50, 50)
+        if self.frame == 4:
+            self. sword.image.clip_draw(612, 0, 204, 122, self.x, self.y, 50, 50)
+        if self.frame == 5:
+            self. sword.image.clip_draw(816, 0, 204, 122, self.x, self.y, 50, 50)
+        if self.frame == 6:
+            self. sword.image.clip_draw(1020, 0, 204, 122, self.x, self.y, 50, 50)
 
 class Sword:
     def __init__(self):
