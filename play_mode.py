@@ -18,10 +18,6 @@ def handle_events():
         elif event.type == SDL_MOUSEBUTTONDOWN or event.type == SDL_KEYDOWN:
             character.handle_event(event)
             sword.state_machine.handle_event(('INPUT', event))
-        else:
-            character.handle_event(event)
-            sword.state_machine.handle_event(('INPUT', event))
-
 open_canvas()
 
 def init(): # 월드가 새로 나올때 그려지는 부분
@@ -48,4 +44,5 @@ def draw(): # 월드가 만들어지는 부분
     game_world.render()
     update_canvas()
 
-def finish():pass
+def finish():
+    pass

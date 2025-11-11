@@ -12,6 +12,9 @@ def finish():
     global image
     del image
 
+def update():
+    pass
+
 def handle_events():
     event_list = get_events()
     for event in event_list:
@@ -24,5 +27,5 @@ def handle_events():
 
 def draw():
     clear_canvas()
-    image.draw(400, 300)
+    image.draw_to_origin(0,0, 400, 600)
     update_canvas()
