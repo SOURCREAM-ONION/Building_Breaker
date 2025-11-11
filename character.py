@@ -27,7 +27,7 @@ class Idle:
 
     def draw(self):
         frame_index = int(self.character.frame)
-        self.character.image.clip_draw(frame_index * 32, 95, 32, 35, 400, 90, 50, 50)
+        self.character.image.clip_draw(frame_index * 32, 95, 32, 35, 200, 90, 50, 50)
 
 class Defence:
     def __init__ (self,character):
@@ -49,9 +49,9 @@ class Defence:
 
     def draw(self):
         if self.frame == 1: # 프레임이 1일때 재생
-            self.character.image.clip_draw(128, 93, 32, 35, 400, 90, 50, 50)
+            self.character.image.clip_draw(128, 93, 32, 35, 200, 90, 50, 50)
         elif self.frame == 2: # 프레임이 2일때 재생
-            self.character.image.clip_draw(0, 61, 32, 35, 400, 90, 50, 50)
+            self.character.image.clip_draw(0, 61, 32, 35, 200, 90, 50, 50)
 
 class Jump:
     def __init__ (self,character):
@@ -73,11 +73,11 @@ class Jump:
 
     def draw(self):
         if self.frame == 1: # 0번 프레임 재생
-            self.character.image.clip_draw(32, 60, 32, 35, 400, 90, 50, 50)
+            self.character.image.clip_draw(32, 60, 32, 35, 200, 90, 50, 50)
         elif self.frame == 2: # 1번 프레임 재생
-            self.character.image.clip_draw(64, 61, 32, 35, 400, 90, 50, 50)
+            self.character.image.clip_draw(64, 61, 32, 35, 200, 90, 50, 50)
         elif self.frame == 3: # 2번 프레임 재생
-            self.character.image.clip_draw(96, 61, 32, 35, 400, 90, 50, 50)
+            self.character.image.clip_draw(96, 61, 32, 35, 200, 90, 50, 50)
 
 class Attack:
     def __init__ (self,character):
@@ -100,17 +100,17 @@ class Attack:
     def draw(self):
         # 현재 프레임에 해당하는 이미지만 그리기
         if self.frame == 0:
-            self.character.image.clip_draw(128, 60, 32, 35, 400, 90, 50, 50)
+            self.character.image.clip_draw(128, 60, 32, 35, 200, 90, 50, 50)
         elif self.frame == 1:
-            self.character.image.clip_draw(0, 29, 32, 35, 400, 90, 50, 50)
+            self.character.image.clip_draw(0, 29, 32, 35, 200, 90, 50, 50)
         elif self.frame == 2:
-            self.character.image.clip_draw(32, 29, 32, 35, 400, 90, 50, 50)
+            self.character.image.clip_draw(32, 29, 32, 35, 200, 90, 50, 50)
         elif self.frame == 3:
-            self.character.image.clip_draw(64, 29, 32, 35, 400, 90, 50, 50)
+            self.character.image.clip_draw(64, 29, 32, 35, 200, 90, 50, 50)
 
 class Character:
     def __init__(self): # 캐릭터가 처음 생성될 때 나오는 부분
-        self.x, self.y = 400, 300 # 캐릭터의 초기 위치
+        self.x, self.y = 200, 90 # 캐릭터의 초기 위치
         self.frame = 0 # 캐릭터의 프레임 초기화
         self.image = load_image('Char1_1.png') # 캐릭터의 이미지 로드
         self.IDLE = Idle(self) # Idle 상태 생성
