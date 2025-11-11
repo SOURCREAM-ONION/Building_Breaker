@@ -9,7 +9,6 @@ logo_start_time = 0.0
 def init():
     global image, logo_start_time, running
     image = load_image('tuk_credit.png')
-    logo_start_time = get_time()
 
     running = True
     logo_start_time = get_time()

@@ -43,6 +43,3 @@ def draw(): # 월드가 만들어지는 부분
     clear_canvas()
     game_world.render()
     update_canvas()
-
-def finish():
-    pass
