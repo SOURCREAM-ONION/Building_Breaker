@@ -19,7 +19,7 @@ def finish():
 
 def update():
     global logo_start_time
-    if get_time() - logo_start_time > 2.0:
+    if get_time() - logo_start_time > 1.0:
         game_framework.change_mode(title_mode)
 
 def draw():

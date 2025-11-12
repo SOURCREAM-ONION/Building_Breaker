@@ -94,7 +94,7 @@ class Attack:
         pass
 
     def do(self):
-        self.frame = self.frame + 0.1
+        self.frame = self.frame + 0.05
         if self.frame >= self.frame_count:
             # 이벤트를 발생시켜 상태 전환
             self.character.state_machine.handle_event(('TIME_OUT', None))

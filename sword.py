@@ -24,7 +24,7 @@ class Idle_Sword:
 
 class Wield_Sword:
     def __init__(self, sword):
-        self.x, self.y = 200, 100
+        self.y = 96
         self.sword = sword
         self.frame = 0
         self.frame_count = 6
@@ -36,23 +36,24 @@ class Wield_Sword:
         pass
 
     def do(self):
-        self.frame = self.frame +1.5
+        self.frame = self.frame + 0.09
         if self.frame >= self.frame_count:
             self.sword.state_machine.handle_event(('TIME_OUT', None))
 
     def draw(self):
-        if self.frame == 1:
-            self. sword.image.clip_draw(0, 0, 122, 122, self.x, self.y, 50, 50)
-        if self.frame == 2:
-            self. sword.image.clip_draw(204, 0, 204, 122, self.x, self.y, 50, 50)
-        if self.frame == 3:
-            self. sword.image.clip_draw(408, 0, 204, 122, self.x, self.y, 50, 50)
-        if self.frame == 4:
-            self. sword.image.clip_draw(612, 0, 204, 122, self.x, self.y, 50, 50)
-        if self.frame == 5:
-            self. sword.image.clip_draw(816, 0, 204, 122, self.x, self.y, 50, 50)
-        if self.frame == 6:
-            self. sword.image.clip_draw(1020, 0, 204, 122, self.x, self.y, 50, 50)
+        frame_index = int(self.frame)
+        if frame_index == 0:
+            self.sword.image.clip_draw(0, 0, 204, 122, self.sword.x, self.y, 100, 50)
+        elif frame_index == 1:
+            self.sword.image.clip_draw(204, 0, 204, 122, self.sword.x, self.y, 100, 50)
+        elif frame_index == 2:
+            self.sword.image.clip_draw(408, 0, 204, 122, self.sword.x, self.y, 90, 50)
+        elif frame_index == 3:
+            self.sword.image.clip_draw(612, 0, 204, 122, self.sword.x, self.y, 90, 50)
+        elif frame_index == 4:
+            self.sword.image.clip_draw(816, 0, 204, 122, self.sword.x, self.y, 90, 50)
+        elif frame_index == 5:
+            self.sword.image.clip_draw(1020, 0, 204, 122, self.sword.x, self.y, 90, 50)
 
 class Sword:
     def __init__(self):
