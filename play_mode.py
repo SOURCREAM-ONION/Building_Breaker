@@ -27,6 +27,7 @@ def init(): # 월드가 새로 나올때 그려지는 부분
 
     running = True
     world = []
+    game_world.clear()
 
     sword = Sword()
     game_world.add_object(sword, 2)

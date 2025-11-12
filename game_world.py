@@ -22,3 +22,7 @@ def remove_object(o):
             layer.remove(o)
             return
     print("삭제할 월드가 없습니다")
+
+def clear():
+    for layer in world:
+        layer.clear()
