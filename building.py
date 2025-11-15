@@ -19,4 +19,5 @@ class Building:
         pass
 
     def draw(self):
-        self.building.draw_now(self.x, self.y, 400, 500)
+        self.building.clip_draw(0, 307, 1080, 307, self.x, self.y, 300, 20)
+        self.building.clip_draw(0, 614, 1080, 307, self.x, self.y + 50, 300, 20)
