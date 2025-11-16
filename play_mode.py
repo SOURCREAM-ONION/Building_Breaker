@@ -44,6 +44,12 @@ def init(): # 월드가 새로 나올때 그려지는 부분
 def update(): # 월드에 객체가 추가되는 부분
     game_world.update()
 
+def collide(a, b):
+    left_a, bottom_a, right_a, top_a = a.get_bb()
+    left_b, bottom_b, right_b, top_b = b.get_bb()
+
+    if bottom_a > top_b: return False
+    return True
 
 def draw(): # 월드가 만들어지는 부분
     clear_canvas()
