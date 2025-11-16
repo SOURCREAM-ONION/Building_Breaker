@@ -46,6 +46,7 @@ def update(): # 월드에 객체가 추가되는 부분
 
     if game_world.collide(building, sword):
         print("Collision Detected between Building and Sword")
+        game_world.remove_object(building)
 
 def draw(): # 월드가 만들어지는 부분
     clear_canvas()
