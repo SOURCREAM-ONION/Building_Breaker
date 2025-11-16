@@ -32,3 +32,4 @@ class Building:
         self.building.clip_draw(0, 2456, 1080, 307, self.x, self.y + 250, 400, 30)
         self.building.clip_draw(0, 2763, 1080, 307, self.x, self.y + 285, 400, 30)
         self.building.clip_draw(0, 3070, 1080, 307, self.x, self.y + 320, 400, 30)
+        draw_rectangle(*self.get_bb())
