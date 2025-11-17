@@ -2,6 +2,7 @@ from pico2d import *
 from state_machine import StateMachine
 from character import Character, mouse_left_click, time_out, mouse_right_click, jump_key_press
 
+import game_framework
 
 class Idle_Sword:
     def __init__(self, sword):
@@ -28,6 +29,9 @@ class Wield_Sword:
         self.sword = sword
         self.frame = 0
         self.frame_count = 6
+        self.TIME_PER_ACTION = 1.0 / 0.09 # 검 휘두르기 애니메이션 속도
+        self.ACTION_PER_TIME = 1.0 / 0.2 # 검 휘두르기 애니메이션 동작 시간
+        self.FRAMES_PER_ACTION = 6 # 검 휘두르기 애니메이션 프레임 수
 
     def enter(self):
         self.frame = 0
@@ -36,7 +40,7 @@ class Wield_Sword:
         pass
 
     def do(self):
-        self.frame = self.frame + 0.2
+        self.frame = self.frame + self.FRAMES_PER_ACTION * self.ACTION_PER_TIME * game_framework.frame_time
         if self.frame >= self.frame_count:
             self.sword.state_machine.handle_event(('TIME_OUT', None))
 
