@@ -32,13 +32,13 @@ def init(): # 월드가 새로 나올때 그려지는 부분
     game_world.clear()
 
     sword = Sword()
-    game_world.add_object(sword, 2)
+    game_world.add_object(sword, 0)
 
     character = Character()
-    game_world.add_object(character, 0)
+    game_world.add_object(character, 1)
 
     building = Building()
-    game_world.add_object(building, 1)
+    game_world.add_object(building, 0)
 
 
 def update(): # 월드에 객체가 추가되는 부분
