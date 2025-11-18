@@ -21,8 +21,14 @@ class Building:
         pass
 
     def update(self):
-        if self.y > 20:  # 건물이 y좌표 20이 될때까지
-            self.y -= 0.5  # 건물이 y좌표로 내려옴
+        # 각 층이 개별적으로 바닥(y=20)으로 내려옴
+        for floor in self.floors:
+            if floor['alive']:
+                target_y = 20  # 목표 y 위치
+                current_y = self.y + floor['y_offset']
+
+                if current_y > target_y:
+                    floor['y_offset'] -= 0.5  # 각 층이 개별적으로 내려옴
 
     def do(self):
         pass
