@@ -62,10 +62,14 @@ class Wield_Sword:
 
 class Defence_Sword:
     def __init__(self, sword):
-        self.x = 203
-        self.y = 35
+        self.x = 170
+        self.y = 15
         self.sword = sword
         self.frame = 0 # 검 방어 애니메이션 프레임 초기화
+        self.frame_count = 1 # 검 방어 애니메이션 프레임 수
+        self.TIME_PER_ACTION = 0.4 # 검 방어 애니메이션 속도
+        self.ACTION_PER_TIME = 2.7 # 검 방어 애니메이션 동작 시간
+        self.FRAMES_PER_ACTION = 1 # 검 방어 애니메이션 프레임 수
 
     def enter(self):
         self.frame = 0
@@ -74,10 +78,13 @@ class Defence_Sword:
         pass
 
     def do(self):
-        pass
+        self.frame += self.FRAMES_PER_ACTION * self.ACTION_PER_TIME * game_framework.frame_time
+        if self.frame >= self.frame_count:
+            self.sword.state_machine.handle_event(('TIME_OUT', None))
 
     def draw(self):
-        self.sword.image.clip_composite_draw(122, 0, 204, 122,self.x, self.y, 100, 50)
+        import math
+        self.sword.image.clip_composite_draw(0, 0, 204, 122, math.pi, '', self.x, self.y, 100, 50)
 
 class Sword:
     def __init__(self):
@@ -85,11 +92,13 @@ class Sword:
         self.image = load_image('basic_sword.png') # 검의 이미지 로드
         self.IDLE_SWORD = Idle_Sword(self)
         self.WIELD_SWORD = Wield_Sword(self)
+        self.DEFENCE_SWORD = Defence_Sword(self)
         self.state_machine = StateMachine(
             self.IDLE_SWORD,
                     {
-                        self.IDLE_SWORD: {mouse_left_click: self.WIELD_SWORD}, # IDLE상태일 때 일어나는 이벤트
+                        self.IDLE_SWORD: {mouse_left_click: self.WIELD_SWORD, mouse_right_click: self.DEFENCE_SWORD}, # IDLE상태일 때 일어나는 이벤트
                         self.WIELD_SWORD: {time_out : self.IDLE_SWORD}, # WIELD상태일 때 일어나는 이벤트
+                        self.DEFENCE_SWORD: {time_out : self.IDLE_SWORD} # DEFENCE상태일 때 일어나는 이벤트
                     }
         )
 
