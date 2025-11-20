@@ -21,7 +21,9 @@ class Building:
         self.num_floors = num_floors # 층 수 저장
 
     def update(self):
-        # 각 층이 개별적으로 바닥(y=20)으로 내려옴
+        """ 각 층이 개별적으로 바닥(y=20)으로 내려옴
+        만약 floor가 파괴되지 않았다면 (alive가 True라면) target_y(20)까지 내려옴, 현재위치는 y값 + 층수의 y값
+        for문을 돌려 각 층마다 처리 """
         for floor in self.floors:
             if floor['alive']: # 만약 floor가 살아있다면 = 파괴되지 않았다면 = True라면
                 target_y = 20  # 목표 y 위치
@@ -37,6 +39,7 @@ class Building:
 
     def draw(self):
         # 살아있는 층만 그리기
+        # for문을 돌려 각 층마다 처리
         for floor in self.floors:
             if floor['alive']:
                 self.building.clip_draw(0, floor['clip_y'], 1080, 307,
@@ -66,6 +69,11 @@ class Building41(Building):
         super().__init__('Building41.png',num_floors=11)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
         print("자식 클래스 초기화 완료") # 디버그 메시지
 
+class Building33(Building):
+    def __init__(self):
+        super().__init__('Building33.png',num_floors=7)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        print("자식 클래스 초기화 완료") # 디버그 메시지
+
 def create_random_building():
-    buildings = [Building, Building52, Building41]
+    buildings = [Building33]
     return random.choice(buildings)()
