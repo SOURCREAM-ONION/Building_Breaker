@@ -3,7 +3,7 @@ from pico2d import *
 
 class Building:
     def __init__(self):
-        self.x, self.y = 200, 500  # 건물의 초기 위치
+        self.x, self.y = 200, 1000  # 건물의 초기 위치
         self.building = load_image('Building1.png')  # 건물 이미지 로드
         self.framex = 450  # 건물 프레임 크기 x
         self.framey = 100  # 건물 프레임 크기 y

@@ -41,6 +41,7 @@ def init():  # 월드가 새로 나올때 그려지는 부분
     global world
     global sword
     global building
+    global spawn_timer
 
     running = True
     world = []
@@ -55,40 +56,27 @@ def init():  # 월드가 새로 나올때 그려지는 부분
     building = Building()
     game_world.add_object(building, 0)
 
+    spawn_timer = 0.0
+
 
 def update():  # 월드에 객체가 추가되는 부분
+    global spawn_timer
     game_world.update()
 
+    spawn_timer += game_framework.frame_time
+    if spawn_timer >= 15.0:
+        spawn_timer = 0.0
+        new_building = Building()
+        game_world.add_object(new_building, 0)
+
+    # 검 공격 중일 때 모든 빌딩과 충돌 체크
     if sword.is_attacking():
-        # 1층 충돌 체크
-        if collide_bb(building.get_bb_floor1(), sword.get_bb()):
-            building.destroy_floor(0)  # 1층만 파괴
-
-        # 2층 충돌 체크
-        if collide_bb(building.get_bb_floor2(), sword.get_bb()):
-            building.destroy_floor(1)  # 2층만 파괴
-
-        # 3층 충돌 체크
-        if collide_bb(building.get_bb_floor3(), sword.get_bb()):
-            building.destroy_floor(2)  # 3층만 파괴
-
-        if collide_bb(building.get_bb_floor4(), sword.get_bb()):
-            building.destroy_floor(3)  # 4층만 파괴
-
-        if collide_bb(building.get_bb_floor5(), sword.get_bb()):
-            building.destroy_floor(4)  # 5층만 파괴
-
-        if collide_bb(building.get_bb_floor6(), sword.get_bb()):
-            building.destroy_floor(5)  # 6층만 파괴
-
-        if collide_bb(building.get_bb_floor7(), sword.get_bb()):
-            building.destroy_floor(6)  # 7층만 파괴
-
-        if collide_bb(building.get_bb_floor8(), sword.get_bb()):
-            building.destroy_floor(7)  # 8층만 파괴
-
-        if collide_bb(building.get_bb_floor9(), sword.get_bb()):
-            building.destroy_floor(8)  # 9층만 파괴
+        for obj in game_world.world[0]:
+            if isinstance(obj, Building):
+                for i in range(9):
+                    bb_method = getattr(obj, f'get_bb_floor{i+1}')
+                    if collide_bb(bb_method(), sword.get_bb()):
+                        obj.destroy_floor(i)
 
 
 def draw():  # 월드가 만들어지는 부분
