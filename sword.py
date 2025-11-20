@@ -62,10 +62,13 @@ class Wield_Sword:
 
 class Defence_Sword:
     def __init__(self, sword):
-        pass
+        self.x = 203
+        self.y = 35
+        self.sword = sword
+        self.frame = 0 # 검 방어 애니메이션 프레임 초기화
 
     def enter(self):
-        pass
+        self.frame = 0
 
     def exit(self):
         pass
@@ -74,7 +77,7 @@ class Defence_Sword:
         pass
 
     def draw(self):
-        pass
+        self.sword.image.clip_composite_draw(122, 0, 204, 122,self.x, self.y, 100, 50)
 
 class Sword:
     def __init__(self):
