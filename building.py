@@ -23,7 +23,7 @@ class Building:
     def update(self):
         # 각 층이 개별적으로 바닥(y=20)으로 내려옴
         for floor in self.floors:
-            if floor['alive']:
+            if floor['alive']: # 만약 floor가 살아있다면 = 파괴되지 않았다면 = True라면
                 target_y = 20  # 목표 y 위치
                 current_y = self.y + floor['y_offset']
                 if current_y > target_y:
@@ -32,7 +32,7 @@ class Building:
     # 층 파괴 함수
     def destroy_floor(self, floor_num):
         if 0 <= floor_num < len(self.floors):
-            self.floors[floor_num]['alive'] = False
+            self.floors[floor_num]['alive'] = False # 해당 층을 파괴 상태로 변경
             print(f"{floor_num + 1}층 파괴됨!")
 
     def draw(self):
@@ -69,8 +69,12 @@ class Building:
 class Building52(Building):
     def __init__(self):
         super().__init__('Building52.png',num_floors=7)  # 부모의 __init__ 호출
-        print("자식 클래스 초기화 완료")
+        print("자식 클래스 초기화 완료") # 디버그 메시지
 
+class Building41(Building):
+    def __init__(self):
+        super().__init__('Building41.png',num_floors=11)  # 부모의 __init__ 호출
+        print("자식 클래스 초기화 완료") # 디버그 메시지
 def create_random_building():
-    buildings = [Building, Building52]
+    buildings = [Building, Building52, Building41]
     return random.choice(buildings)()
