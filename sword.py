@@ -60,6 +60,22 @@ class Wield_Sword:
         elif frame_index == 5:
             self.sword.image.clip_draw(1020, 0, 204, 122, self.sword.x, self.y, 90, 50)
 
+class Defence_Sword:
+    def __init__(self, sword):
+        pass
+
+    def enter(self):
+        pass
+
+    def exit(self):
+        pass
+
+    def do(self):
+        pass
+
+    def draw(self):
+        pass
+
 class Sword:
     def __init__(self):
         self.x, self.y = 203, 27 # 검의 초기 위치
