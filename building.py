@@ -1,6 +1,12 @@
 from pico2d import *
 import random
 
+PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
+RUN_SPEED_KMPH = 20.0  # Km / Hour
+RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
+RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
+RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
+
 # Building의 부모클래스 정의
 class Building:
     def __init__(self, image_file='Building1.png', num_floors=9): # 기본 건물 이미지 파일과 층 수
@@ -62,18 +68,18 @@ class Building:
 class Building52(Building):
     def __init__(self):
         super().__init__('Building52.png',num_floors=7)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
-        print("자식 클래스 초기화 완료") # 디버그 메시지
+        print("52 자식 클래스 초기화 완료") # 디버그 메시지
 
 class Building41(Building):
     def __init__(self):
         super().__init__('Building41.png',num_floors=11)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
-        print("자식 클래스 초기화 완료") # 디버그 메시지
+        print("41 자식 클래스 초기화 완료") # 디버그 메시지
 
 class Building33(Building):
     def __init__(self):
         super().__init__('Building33.png',num_floors=7)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
-        print("자식 클래스 초기화 완료") # 디버그 메시지
+        print("33 자식 클래스 초기화 완료") # 디버그 메시지
 
 def create_random_building():
-    buildings = [Building33]
+    buildings = [Building,Building41,Building52,Building33]
     return random.choice(buildings)()
