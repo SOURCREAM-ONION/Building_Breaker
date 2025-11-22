@@ -20,19 +20,21 @@ class Idle_Sword:
 
     def draw(self):
         import math
-        self.sword.image.clip_composite_draw(0, 0, 122, 122, -math.pi / 2, '' ,self.sword.x, self.sword.y, 50, 50)
+        self.sword.image.clip_composite_draw(0, 0, 122, 122, -math.pi / 2, '' ,self.sword.x, self.sword.y, 100, 100)
 
 class Wield_Sword:
     images = None
 
     def __init__(self, sword):
-        self.y = 35
+        self.x, self.y = 200, 53
         self.sword = sword
         self.frame = 0
         self.frame_count = 6
         self.TIME_PER_ACTION = 1.0 / 0.09 # 검 휘두르기 애니메이션 속도
         self.ACTION_PER_TIME = 1.0 / 0.09 # 검 휘두르기 애니메이션 동작 시간
         self.FRAMES_PER_ACTION = 6 # 검 휘두르기 애니메이션 프레임 수
+        self.framex = 120
+        self.framey = 100
 
     def enter(self):
         self.frame = 0
@@ -48,22 +50,23 @@ class Wield_Sword:
     def draw(self):
         frame_index = int(self.frame)
         if frame_index == 0:
-            self.sword.image.clip_draw(0, 0, 204, 122, self.sword.x, self.y, 100, 50)
+            self.sword.image.clip_draw(0, 0, 204, 122, self.x, self.y, self.framex, self.framey)
         elif frame_index == 1:
-            self.sword.image.clip_draw(204, 0, 204, 122, self.sword.x, self.y, 100, 50)
+            self.sword.image.clip_draw(204, 0, 204, 122, self.x, self.y, self.framex, self.framey)
         elif frame_index == 2:
-            self.sword.image.clip_draw(408, 0, 204, 122, self.sword.x, self.y, 90, 50)
+            self.sword.image.clip_draw(408, 0, 204, 122, self.x, self.y, self.framex, self.framey)
         elif frame_index == 3:
-            self.sword.image.clip_draw(612, 0, 204, 122, self.sword.x, self.y, 90, 50)
+            self.sword.image.clip_draw(612, 0, 204, 122, self.x, self.y, self.framex, self.framey)
         elif frame_index == 4:
-            self.sword.image.clip_draw(816, 0, 204, 122, self.sword.x, self.y, 90, 50)
+            self.sword.image.clip_draw(816, 0, 204, 122, self.x, self.y, self.framex, self.framey)
         elif frame_index == 5:
-            self.sword.image.clip_draw(1020, 0, 204, 122, self.sword.x, self.y, 90, 50)
+            self.sword.image.clip_draw(1020, 0, 204, 122, self.x, self.y, self.framex, self.framey)
+
 
 class Defence_Sword:
     def __init__(self, sword):
-        self.x = 170
-        self.y = 15
+        self.x = 160
+        self.y = 5
         self.sword = sword
         self.frame = 0 # 검 방어 애니메이션 프레임 초기화
         self.frame_count = 1 # 검 방어 애니메이션 프레임 수
@@ -84,11 +87,11 @@ class Defence_Sword:
 
     def draw(self):
         import math
-        self.sword.image.clip_composite_draw(0, 0, 204, 122, math.pi, '', self.x, self.y, 100, 50)
+        self.sword.image.clip_composite_draw(0, 0, 204, 122, math.pi, '', self.x, self.y, 150, 100)
 
 class Sword:
     def __init__(self):
-        self.x, self.y = 203, 27 # 검의 초기 위치
+        self.x, self.y = 222, 30 # 검의 초기 위치
         self.image = load_image('basic_sword.png') # 검의 이미지 로드
         self.IDLE_SWORD = Idle_Sword(self)
         self.WIELD_SWORD = Wield_Sword(self)
