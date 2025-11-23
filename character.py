@@ -131,6 +131,9 @@ class Character:
         self.x, self.y = 200, 30 # 캐릭터의 초기 위치
         self.frame = 0 # 캐릭터의 프레임 초기화
         self.image = load_image('Char1_1.png') # 캐릭터의 이미지 로드
+        self.last_defence_time = 0.0 # 마지막 방어 시간 초기화
+        self.defence_cooltime = 2.0 # 방어 쿨타임 설정 (초단위)
+
         self.IDLE = Idle(self) # Idle 상태 생성
         self.ATTACK = Attack(self) # Attack 상태 생성
         self.DEFENCE = Defence(self) # Defence 상태 생성
@@ -145,6 +148,14 @@ class Character:
             }
         )
 
+    def can_defence(self):
+        import time
+        current_time = time.time()
+        if current_time - self.last_defence_time >= self.defence_cooltime:
+            self.last_defence_time = current_time
+            return True
+        return False
+
     def update(self):
         self.state_machine.update()  # 상태 머신한테 update를 맡김
 
@@ -152,4 +163,9 @@ class Character:
         self.state_machine.draw() # 상태 머신한테 draw를 맡김
 
     def handle_event(self, event): # 이벤트가 발생했을 때 처리하는 부분
-        self.state_machine.handle_event(('INPUT', event)) # 상태 머신한테 이벤트 처리를 맡김
+        # 방어 입력 시 쿨다운 체크
+        if mouse_right_click(('INPUT', event)):
+            if self.can_defence():
+                self.state_machine.handle_event(('INPUT', event))
+        else:
+            self.state_machine.handle_event(('INPUT', event))
