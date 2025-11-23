@@ -93,6 +93,9 @@ class Sword:
     def __init__(self):
         self.x, self.y = 222, 30 # 검의 초기 위치
         self.image = load_image('basic_sword.png') # 검의 이미지 로드
+        self.last_defence_time = 0.0 # 마지막 방어 시간 초기화
+        self.defence_cooltime = 2.0
+
         self.IDLE_SWORD = Idle_Sword(self)
         self.WIELD_SWORD = Wield_Sword(self)
         self.DEFENCE_SWORD = Defence_Sword(self)
@@ -106,6 +109,13 @@ class Sword:
         )
 
 
+    def can_defence(self):
+        import time
+        current_time = time.time()
+        if current_time - self.last_defence_time >= self.defence_cooltime:
+            self.last_defence_time = current_time
+            return True
+        return False
 
     def update(self):
         self.state_machine.update()
@@ -130,4 +140,9 @@ class Sword:
         return self.state_machine.current_state == self.DEFENCE_SWORD
 
     def handle_event(self, event):
-        pass
+        # 방어 입력 시 쿨다운 체크
+        if mouse_right_click(('INPUT', event)):
+            if self.can_defence():
+                self.state_machine.handle_event(('INPUT', event))
+        else:
+            self.state_machine.handle_event(('INPUT', event))
