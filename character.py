@@ -197,7 +197,7 @@ class Character:
                 self.IDLE : {mouse_left_click : self.ATTACK, mouse_right_click : self.DEFENCE, jump_key_press : self.JUMP},
                 self.ATTACK : {time_out : self.IDLE},
                 self.DEFENCE : {time_out : self.IDLE},
-                self.JUMP : {time_out : self.IDLE, mouse_left_click : self.ATTACK},
+                self.JUMP : {time_out : self.IDLE, mouse_left_click : self.ATTACK, mouse_right_click : self.DEFENCE},
             }
         )
 
