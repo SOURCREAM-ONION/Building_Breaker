@@ -1,4 +1,4 @@
-from pico2d import load_image
+from pico2d import *
 from sdl2 import SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT, SDL_BUTTON_RIGHT, SDL_KEYDOWN, SDLK_SPACE
 from state_machine import StateMachine
 
@@ -212,8 +212,13 @@ class Character:
     def update(self):
         self.state_machine.update()  # 상태 머신한테 update를 맡김
 
+    def get_bb(self):
+        #캐릭터 충돌처리
+        return self.x - 15, self.y - 25, self.x + 15, self.y + 20
+
     def draw(self):  # 캐릭터가 그려지는 부분
         self.state_machine.draw() # 상태 머신한테 draw를 맡김
+        draw_rectangle(*self.get_bb())
 
     def handle_event(self, event): # 이벤트가 발생했을 때 처리하는 부분
         # 방어 입력 시 쿨다운 체크
