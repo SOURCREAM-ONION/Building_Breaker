@@ -136,10 +136,10 @@ class Sword:
             draw_rectangle(*self.get_aa()) # 검의 충돌 박스 그리기 (실제 충돌처리와는 관련 X)
 
     def get_aa(self):
-        return self.x - 40, self.y - 10, self.x + 40, self.y + 40
+        return self.x - 0, self.y + 30, self.x + 80, self.y + 50
 
     def get_bb(self):
-        return self.x - 40, self.y - 10, self.x + 40, self.y + 60
+        return self.x - 40, self.y - 20, self.x + 40, self.y + 40
 
     def is_attacking(self):
         return self.state_machine.current_state == self.WIELD_SWORD
