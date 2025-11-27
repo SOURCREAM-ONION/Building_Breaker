@@ -47,11 +47,11 @@ def init():  # 월드가 새로 나올때 그려지는 부분
     world = []
     game_world.clear()
 
-    sword = Sword()
-    game_world.add_object(sword, 0)
-
     character = Character()
     game_world.add_object(character, 1)
+
+    sword = Sword(character)
+    game_world.add_object(sword, 0)
 
     building = create_random_building()
     game_world.add_object(building, 0)
