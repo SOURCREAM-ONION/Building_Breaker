@@ -50,9 +50,12 @@ class Building:
 
     # 건물이 튕겨지는 함수
     def push_up(self):
+        # 방어 성공 시 호출: 모든 층을 위로 튕겨 올림
         for floor in self.floors:
             if floor['alive']:
-                floor['y_offset'] += BOUNCE_SPEED_KMPH  # 각 층이 개별적으로 올라옴
+                # [핵심] 위치를 바꾸는 게 아니라 '속도'를 위쪽으로 설정함
+                # 중력에 의해 자연스럽게 느려지다가 다시 떨어지게 됨
+                floor['y_offset'] += BOUNCE_SPEED_KMPH
 
     def draw(self):
         # 살아있는 층만 그리기
