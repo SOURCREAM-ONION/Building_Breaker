@@ -83,7 +83,7 @@ def update():  # 월드에 객체가 추가되는 부분
             if isinstance(obj, Building):
                 for i in range(obj.num_floors):
                     bb = obj.get_bb_floor(i)
-                    if bb and collide_bb(bb, sword.get_bb()):
+                    if bb and collide_bb(bb, sword.get_aa()):
                         obj.push_up()
 
     character_bb = character.get_bb()  # 캐릭터의 현재 충돌 박스
