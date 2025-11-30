@@ -4,6 +4,7 @@ from character import Character, mouse_left_click, time_out, mouse_right_click, 
 
 import game_framework
 
+# 검 대기 상태
 class Idle_Sword:
     def __init__(self, sword):
         self.sword = sword
@@ -23,6 +24,8 @@ class Idle_Sword:
         import math
         self.sword.image.clip_composite_draw(0, 0, 122, 122, -math.pi / 2, '' ,self.sword.x, self.sword.y, 100, 100)
 
+
+# 검 휘두르기 상태
 class Wield_Sword:
     images = None
 
@@ -67,6 +70,7 @@ class Wield_Sword:
             self.sword.image.clip_draw(1020, 0, 204, 122, self.sword.x, self.sword.y, self.framex, self.framey)
 
 
+# 검 방어 상태
 class Defence_Sword:
     def __init__(self, sword):
         self.x = 160
@@ -96,6 +100,8 @@ class Defence_Sword:
         import math
         self.sword.image.clip_composite_draw(0, 0, 204, 122, math.pi, '', self.sword.x, self.sword.y, 150, 100)
 
+
+# 검 클래스 정의
 class Sword:
     def __init__(self, character):
         self.character = character
@@ -117,6 +123,7 @@ class Sword:
         )
 
 
+    # 방어 쿨타임 체크 함수
     def can_defence(self):
         import time
         current_time = time.time()
@@ -135,15 +142,19 @@ class Sword:
         elif self.state_machine.current_state == self.DEFENCE_SWORD: # 만약 검으로 방어하면
             draw_rectangle(*self.get_aa()) # 검의 충돌 박스 그리기 (실제 충돌처리와는 관련 X)
 
+    # 검의 충돌박스
     def get_aa(self):
         return self.x - 0, self.y + 30, self.x + 80, self.y + 50
 
+    # 캐릭터의 충돌박스
     def get_bb(self):
         return self.x - 40, self.y - 20, self.x + 40, self.y + 40
 
+    # 검이 공격 중인지 확인
     def is_attacking(self):
         return self.state_machine.current_state == self.WIELD_SWORD
 
+    # 검이 방어 중인지 확인
     def is_defending(self):
         return self.state_machine.current_state == self.DEFENCE_SWORD
 

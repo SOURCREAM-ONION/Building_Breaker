@@ -47,14 +47,14 @@ def init():  # 월드가 새로 나올때 그려지는 부분
     world = []
     game_world.clear()
 
-    character = Character()
-    game_world.add_object(character, 1)
+    character = Character() # 캐릭터 객체 생성
+    game_world.add_object(character, 1) # 캐릭터를 월드의 1번 레이어에 추가
 
-    sword = Sword(character)
-    game_world.add_object(sword, 0)
+    sword = Sword(character) # 검 객체 생성
+    game_world.add_object(sword, 0) # 검을 월드의 0번 레이어에 추가
 
-    building = create_random_building()
-    game_world.add_object(building, 0)
+    building = create_random_building() # 빌딩 객체 생성
+    game_world.add_object(building, 0) # 빌딩을 월드의 0번 레이어에 추가
 
     spawn_timer = 0.0
 
@@ -63,6 +63,7 @@ def update():  # 월드에 객체가 추가되는 부분
     global spawn_timer
     game_world.update()
 
+    # 빌딩 스폰 타이머 업데이트
     spawn_timer += game_framework.frame_time
     if spawn_timer >= 15.0:
         spawn_timer = 0.0
@@ -78,6 +79,7 @@ def update():  # 월드에 객체가 추가되는 부분
                     if bb and collide_bb(bb, sword.get_bb()):
                         obj.destroy_floor(i)
 
+    # 검 방어 중일 때 모든 빌딩과 충돌 체크
     if sword.is_defending():
         for obj in game_world.world[0]:
             if isinstance(obj, Building):
@@ -88,6 +90,7 @@ def update():  # 월드에 객체가 추가되는 부분
 
     character_bb = character.get_bb()  # 캐릭터의 현재 충돌 박스
 
+    # 빌딩과 캐릭터의 충돌 체크
     for obj in game_world.world[0]:
         if isinstance(obj, Building):  # 빌딩 객체 찾기
             for i in range(obj.num_floors):

@@ -23,6 +23,7 @@ FRAMES_PER_ACTION = 4 # 동작당 프레임 수
 # 중력 상수 (Jump 클래스 외에도 사용할 수 있게)
 GRAVITY = 400
 
+# 캐릭터 대기 상태
 class Idle:
     def __init__(self,character):
         self.character = character
@@ -51,6 +52,7 @@ class Idle:
         self.character.image.clip_draw(frame_index * 32, 95, 32, 35, 200, self.character.y, 50, 50)
 
 
+# 캐릭터 방어 상태
 class Defence:
     def __init__ (self,character):
         self.character = character
@@ -86,6 +88,8 @@ class Defence:
         elif frame_index == 1:
             self.character.image.clip_draw(0, 61, 32, 35, 200, self.character.y, 50, 50)
 
+
+# 캐릭터 점프 상태
 class Jump:
     FRAMES_PER_ACTION = 3       # 점프 애니메이션 프레임 수
     ACTION_PER_TIME = 1.0 / 0.2 # 점프 애니메이션 속도 (0.1초에 한 번 동작)
@@ -138,6 +142,8 @@ class Jump:
         elif frame_index == 2:
             self.character.image.clip_draw(96, 61, 32, 35, 200, self.character.y, 50, 50)
 
+
+# 캐릭터 공격 상태
 class Attack:
     FRAMES_PER_ACTION = 3 # 공격 애니메이션 프레임 수
     ACTION_PER_TIME = 1.0 / 0.1 # 공격 애니메이션 속도 (0.1초에 한 번 동작)
@@ -178,6 +184,7 @@ class Attack:
             self.character.image.clip_draw(64, 29, 32, 35, 200, self.character.y, 50, 50)
 
 
+# 캐릭터 클래스
 class Character:
     def __init__(self): # 캐릭터가 처음 생성될 때 나오는 부분
         self.x, self.y = 200, 30 # 캐릭터의 초기 위치

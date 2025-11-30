@@ -48,8 +48,8 @@ class Building:
             self.floors[floor_num]['alive'] = False # 해당 층을 파괴 상태로 변경
             print(f"{floor_num + 1}층 파괴됨!")
 
+    # 건물이 튕겨지는 함수
     def push_up(self):
-        PUSH_SPEED_PPS = DROP_SPEED_PPS * 5.0
         for floor in self.floors:
             if floor['alive']:
                 floor['y_offset'] += BOUNCE_SPEED_KMPH  # 각 층이 개별적으로 올라옴
@@ -62,7 +62,7 @@ class Building:
                 self.building.clip_draw(0, floor['clip_y'], 1080, 307,
                                         self.x, self.y + floor['y_offset'],
                                         self.framex, self.framey)
-            # 충돌 박스 함수들
+        # 충돌 박스 함수들
         for i in range(self.num_floors): # 9층 건물
             bb = self.get_bb_floor(i) # 각 층의 충돌 박스 가져오기
             if bb: # 충돌 박스가 존재하면
