@@ -10,7 +10,8 @@ def init():
     image = load_image('EndBackground.png')
 
 def finish():
-    pass
+    global image
+    del image
 
 def update():
     pass
