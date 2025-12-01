@@ -32,4 +32,6 @@ def draw():
     clear_canvas()
     image.draw_to_origin(0,0, 400, 600)
     font.draw(50, 80, 'Press SPACE to Start', (0, 37, 135))
+    font.draw(50, 80, 'Press SPACE to Start', (0, 37, 135))
+    font.draw(50, 80, 'Press SPACE to Start', (0, 37, 135))
     update_canvas()
