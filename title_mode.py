@@ -3,14 +3,17 @@ import game_framework
 import play_mode
 
 image = None
+font = None
 
 def init():
-    global image
+    global image, font
     image = load_image('title.png')
+    font = load_font(None, 30)
 
 def finish():
-    global image
+    global image, font
     del image
+    del font
 
 def update():
     pass
@@ -28,4 +31,5 @@ def handle_events():
 def draw():
     clear_canvas()
     image.draw_to_origin(0,0, 400, 600)
+    font.draw(200, 300, "Press SPACE to Start", (255, 255, 255))
     update_canvas()
