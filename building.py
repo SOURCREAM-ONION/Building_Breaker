@@ -53,10 +53,7 @@ class Building:
         # 방어 성공 시 호출: 모든 층을 위로 튕겨 올림
         for floor in self.floors:
             if floor['alive']:
-                # [핵심 수정]
-                # 건물이 이미 위로 올라가는 중(y_offset > 0)이라면
-                # 다시 쳐올리지 않고 무시합니다. (한 번만 튕기게 하기 위함)
-                    floor['y_offset'] += BOUNCE_SPEED_KMPH
+                    floor['y_offset'] += BOUNCE_SPEED_KMPH # 모든 층이 위로 올라감
 
     def draw(self):
         # 살아있는 층만 그리기
