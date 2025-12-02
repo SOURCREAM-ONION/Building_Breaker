@@ -26,7 +26,8 @@ class Building:
             self.floors.append({
                 'clip_y': i * 307, # 각 층의 클립 y 위치
                 'y_offset': i * 101, # 각 층의 y 오프셋
-                'alive': True # 층이 살아있는지 여부
+                'alive': True, # 층이 살아있는지 여부
+                'hp' : 10 # 각 층의 체력
             })
 
         self.num_floors = num_floors # 층 수 저장
