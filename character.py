@@ -221,7 +221,7 @@ class Character:
 
     def get_bb(self):
         #캐릭터 충돌처리
-        return self.x - 15, self.y - 25, self.x + 15, self.y + 20
+        return self.x - 15, self.y - 0, self.x + 15, self.y + 20
 
     def draw(self):  # 캐릭터가 그려지는 부분
         self.state_machine.draw() # 상태 머신한테 draw를 맡김
