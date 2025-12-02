@@ -110,6 +110,12 @@ def update():  # 월드에 객체가 추가되는 부분
 
                 # 건물의 층과 캐릭터가 충돌했다면
                 if floor_bb and collide_bb(character_bb, floor_bb):
+
+                    # [수정] 충돌 발생 시 위치 보정 (파묻힘 방지)
+                    # floor_bb[1]은 건물 층의 바닥(Bottom) y좌표
+                    # 캐릭터의 Top이 y + 20이므로, 캐릭터 y를 (건물 바닥 - 20)으로 설정하면 딱 맞닿음
+                    character.y = floor_bb[1] - 20
+
                     # 캐릭터가 점프 중(위로 올라가는 중)이라면
                     if character.velocity_y > 0:
                         character.velocity_y = 0  # 상승력을 없애 바로 떨어지게 함
