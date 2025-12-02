@@ -43,6 +43,9 @@ class Building:
                 if current_y > target_y:
                     floor['y_offset'] -= DROP_SPEED_PPS * game_framework.frame_time  # 각 층이 개별적으로 내려옴
 
+    def take_damage(self, floor_num, damage):
+        pass
+
     # 층 파괴 함수
     def destroy_floor(self, floor_num):
         if 0 <= floor_num < len(self.floors):
