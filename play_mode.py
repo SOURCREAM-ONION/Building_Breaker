@@ -64,11 +64,12 @@ def update():  # 월드에 객체가 추가되는 부분
     game_world.update()
 
     # 건물이 일정 위치에 도달하면 게임오버
-    for obj in game_world.world[0]:
-        if isinstance(obj, Building):
-            for i in range(obj.num_floors):
-                if obj.floors[i]['alive']:
-                    floor_y = obj.y + obj.floors[i]['y_offset']
+    for obj in game_world.world[0]: # for문으로 월드의 0번 레이어 객체들 검사
+        if isinstance(obj, Building): # 만약 Building 객체라면
+            for i in range(obj.num_floors): # 각 층을 검사
+                if obj.floors[i]['alive']: # 층이 살아있다면
+                    floor_y = obj.y + obj.floors[i]['y_offset'] # 층의 현재 y 위치 계산
+                     # 층의 바닥이 y=20 이하로 내려갔는지 확인
                     if floor_y <= 20:
                         import game_over
                         game_framework.change_mode(game_over)
@@ -82,10 +83,10 @@ def update():  # 월드에 객체가 추가되는 부분
     #     game_world.add_object(new_building, 0)
 
     # 완전히 파괴한 빌딩 제거
-    for obj  in list(game_world.world[0]):
-        if isinstance(obj, Building):
-            all_destroyed = True
-            for floor in obj.floors:
+    for obj  in list(game_world.world[0]): # for문으로 월드의 0번 레이어 객체들 검사
+        if isinstance(obj, Building): # 만약 Building 객체라면
+            all_destroyed = True # 모든 층이 파괴되었는지 확인하는 변수
+            for floor in obj.floors: # 각 층을 검사
                 if floor['alive']: # 층이 하나라도 살아있다면
                     all_destroyed = False # all_destroyed를 False로
                     break
@@ -95,9 +96,9 @@ def update():  # 월드에 객체가 추가되는 부분
 
     # 빌딩이 하나도 없으면 새 빌딩 생성
     building_exists = False
-    for obj in game_world.world[0]:
-        if isinstance(obj, Building):
-            building_exists = True
+    for obj in game_world.world[0]: # for문으로 월드의 0번 레이어 객체들 검사
+        if isinstance(obj, Building): # 만약 Building 객체라면
+            building_exists = True # 빌딩이 존재함
             break
 
     if not building_exists: # 빌딩이 없으면
@@ -106,44 +107,36 @@ def update():  # 월드에 객체가 추가되는 부분
         print("새 빌딩 생성됨") # 디버그 메시지
 
     # 검 공격 중일 때 모든 빌딩과 충돌 체크
-    if sword.is_attacking():
-        for obj in game_world.world[0]:
-            if isinstance(obj, Building):
-                for i in range(obj.num_floors):
-                    bb = obj.get_bb_floor(i)
-                    if bb and collide_bb(bb, sword.get_bb()):
-                        if (obj, i) not in sword.hit_list:
-                            obj.take_damage(i,1)
-                            sword.hit_list.append((obj, i))
+    if sword.is_attacking(): # 검을 휘두르는 중이라면
+        for obj in game_world.world[0]: # for문으로 월드의 0번 레이어 객체들 검사
+            if isinstance(obj, Building): # 만약 Building 객체라면
+                for i in range(obj.num_floors): # 각 층을 검사
+                    bb = obj.get_bb_floor(i) # 층의 충돌 박스 가져오기
+                    if bb and collide_bb(bb, sword.get_bb()): # 충돌 박스가 존재하고 충돌했다면
+                        if (obj, i) not in sword.hit_list: # 이미 히트리스트에 없다면
+                            obj.take_damage(i,1) # 해당 층에 데미지 1 입히기
+                            sword.hit_list.append((obj, i)) # 히트리스트에 추가
 
     # 검 방어 중일 때 모든 빌딩과 충돌 체크
-    if sword.is_defending():
-        for obj in game_world.world[0]:
-            if isinstance(obj, Building):
-                for i in range(obj.num_floors):
-                    bb = obj.get_bb_floor(i)
-                    if bb and collide_bb(bb, sword.get_aa()):
-                        obj.push_up()
-                        character.velocity_y = -800
+    if sword.is_defending(): # 검으로 방어하는 중이라면
+        for obj in game_world.world[0]: # for문으로 월드의 0번 레이어 객체들 검사
+            if isinstance(obj, Building): # 만약 Building 객체라면
+                for i in range(obj.num_floors): # 각 층을 검사
+                    bb = obj.get_bb_floor(i) # 층의 충돌 박스 가져오기
+                    if bb and collide_bb(bb, sword.get_aa()): # 충돌 박스가 존재하고 충돌했다면
+                        obj.push_up() # 빌딩 튕겨 올리기
+                        character.velocity_y = -800 # 캐릭터를 강제로 아래로 떨어뜨림
 
     character_bb = character.get_bb()  # 캐릭터의 현재 충돌 박스
 
     # 빌딩과 캐릭터의 충돌 체크
-    for obj in game_world.world[0]:
+    for obj in game_world.world[0]: # for문으로 월드의 0번 레이어 객체들 검사
         if isinstance(obj, Building):  # 빌딩 객체 찾기
-            for i in range(obj.num_floors):
-                floor_bb = obj.get_bb_floor(i)
-
-                # 건물의 층과 캐릭터가 충돌했다면
-                if floor_bb and collide_bb(character_bb, floor_bb):
-
-                    # [수정] 충돌 발생 시 위치 보정 (파묻힘 방지)
-                    # floor_bb[1]은 건물 층의 바닥(Bottom) y좌표
-                    # 캐릭터의 Top이 y + 20이므로, 캐릭터 y를 (건물 바닥 - 20)으로 설정하면 딱 맞닿음
-                    character.y = floor_bb[1] - 20
-
-                    # 캐릭터가 점프 중(위로 올라가는 중)이라면
-                    if character.velocity_y > 0:
+            for i in range(obj.num_floors): # 각 층을 검사
+                floor_bb = obj.get_bb_floor(i) # 층의 충돌 박스 가져오기
+                if floor_bb and collide_bb(character_bb, floor_bb):# 건물의 층과 캐릭터가 충돌했다면
+                    character.y = floor_bb[1] - 20 # 캐릭터를 층 위에 위치시킴
+                    if character.velocity_y > 0: # 캐릭터가 점프 중(위로 올라가는 중)이라면
                         character.velocity_y = 0  # 상승력을 없애 바로 떨어지게 함
 
 
