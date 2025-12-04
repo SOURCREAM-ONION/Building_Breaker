@@ -5,8 +5,13 @@ from sword import Sword
 import game_framework
 import title_mode
 from building import create_random_building,Building
-from background import Background
+from background import Background2, Background3
 
+current_map_class = Background2  # 현재 맵 클래스를 Background2로 설정
+
+def set_background_class(cls):
+    global current_map_class
+    current_map_class = cls
 
 # 충돌 체크 함수 추가
 def collide_bb(bb_a, bb_b):
@@ -48,8 +53,8 @@ def init():  # 월드가 새로 나올때 그려지는 부분
     world = [[],[],[]]
     game_world.clear()
 
-    background = Background()
-    game_world.add_object(background, 0) # 배경을 월드의 -1번 레이어에 추가
+    background = current_map_class()
+    game_world.add_object(background, 0) # 배경을 월드의 0번 레이어에 추가
 
     character = Character() # 캐릭터 객체 생성
     game_world.add_object(character, 1) # 캐릭터를 월드의 1번 레이어에 추가
