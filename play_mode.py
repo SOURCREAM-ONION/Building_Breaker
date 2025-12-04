@@ -42,12 +42,7 @@ def handle_events():
 
 
 def init():  # 월드가 새로 나올때 그려지는 부분
-    global running
-    global character
-    global world
-    global sword
-    global building
-    global spawn_timer
+    global running, character, world, sword, building, spawn_timer
 
     running = True
     world = [[],[],[]]
