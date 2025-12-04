@@ -15,7 +15,7 @@ BOUNCE_SPEED_KMPH = 400 # 방어 시 건물이 살짝 튕기는 속도
 # Building의 부모클래스 정의
 class Building:
     def __init__(self, image_file='Building1.png', num_floors=9): # 기본 건물 이미지 파일과 층 수
-        self.x, self.y = 240, 1000  # 건물의 초기 위치
+        self.x, self.y = 240, 1500  # 건물의 초기 위치
         self.building = load_image(image_file)  # 건물 이미지 로드
         self.framex = 480  # 건물 프레임 크기 x
         self.framey = 150  # 건물 프레임 크기 y
@@ -83,7 +83,7 @@ class Building:
         if not self.floors[floor_num]['alive']: # 층이 파괴되었으면
             return None # 충돌 박스 없음
         floor_y = self.y + self.floors[floor_num]['y_offset'] # 층의 현재 y 위치 계산
-        return self.x - 225, floor_y - 75, self.x + 225, floor_y + 75 # 충돌 박스 좌표 반환
+        return self.x - 250, floor_y - 75, self.x + 250, floor_y + 75 # 충돌 박스 좌표 반환
 
 
 # 빌딩의 자식 클래스 (빌딩 자식 클래스의 숫자는 파일의 숫자와 같게 함)
@@ -102,6 +102,11 @@ class Building33(Building):
         super().__init__('Building33.png',num_floors=7)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
         print("33 자식 클래스 초기화 완료") # 디버그 메시지
 
+class Building4(Building):
+    def __init__(self):
+        super().__init__('Building4.png',num_floors=11)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        print("4 자식 클래스 초기화 완료") # 디버그 메시지
+
 def create_random_building():
-    buildings = [Building,Building41,Building52,Building33]
+    buildings = [Building,Building41,Building52,Building33,Building4]
     return random.choice(buildings)()
