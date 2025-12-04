@@ -32,7 +32,7 @@ def handle_events():
 def draw():
     clear_canvas()
     image.draw_to_origin(0,0, 480, 720)
-    font.draw(50, 80, 'Press SPACE to Start', (0, 37, 135))
-    font.draw(50, 80, 'Press SPACE to Start', (0, 37, 135))
-    font.draw(50, 80, 'Press SPACE to Start', (0, 37, 135))
+    font.draw(100, 80, 'Press SPACE to Start', (0, 90, 135))
+    font.draw(100, 80, 'Press SPACE to Start', (0, 90, 135))
+    font.draw(100, 80, 'Press SPACE to Start', (0, 90, 135))
     update_canvas()
