@@ -5,7 +5,7 @@ from sword import Sword
 import game_framework
 import title_mode
 from building import create_random_building,Building
-from background import Background2, Background3
+from background import Background2, Background3, Background4, Background5
 
 current_map_class = Background2  # 현재 맵 클래스를 Background2로 설정
 
