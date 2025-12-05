@@ -199,7 +199,7 @@ class CutterSword(Sword):
 class GreenSword(Sword):
     def __init__(self, character):
         super().__init__(character)
-        self.image = load_image('sword/green_sword.png')  # 그린 검 이미지 로드
+        self.image = load_image('sword/greed_sword.png')  # 그린 검 이미지 로드
 
 class IceSword(Sword):
     def __init__(self, character):
