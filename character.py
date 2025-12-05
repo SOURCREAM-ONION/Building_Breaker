@@ -190,7 +190,7 @@ class Character:
         self.x, self.y = 240, 100 # 캐릭터의 초기 위치
         self.frame = 0 # 캐릭터의 프레임 초기화
         self.velocity_y = 0 # 캐릭터의 수직 속도 초기화
-        self.image = load_image('Char1_2.png') # 캐릭터의 이미지 로드
+        self.image = load_image('Char1_1.png') # 캐릭터의 이미지 로드
         self.last_defence_time = 0.0 # 마지막 방어 시간 초기화
         self.defence_cooltime = 2.0 # 방어 쿨타임 설정 (초단위)
 
@@ -250,3 +250,9 @@ class Character:
                 self.state_machine.handle_event(('INPUT', event))
         else:
             self.state_machine.handle_event(('INPUT', event))
+
+
+class   Char2(Character):
+    def __init__(self): # 부모의 모든 부분을 가져옴 ( sprite가 기존과 호환되기 때문에 가능 )
+        super().__init__()
+        self.image = load_image('char1_2.png')

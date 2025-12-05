@@ -2,6 +2,7 @@ from pico2d import *
 import game_framework
 import play_mode
 import title_mode
+import select_character
 from background import Background2, Background3, Background4, Background5
 
 direction_image = None
@@ -39,11 +40,6 @@ def draw():
 
     update_canvas()
 
-
-
-
-    update_canvas()
-
 def handle_events():
     global selection_index, current_preview
 
@@ -65,4 +61,4 @@ def handle_events():
             elif event.key == SDLK_SPACE:
                 selected_class = map_list[selection_index]
                 play_mode.set_background_class(selected_class)
-                game_framework.change_mode(play_mode)
+                game_framework.change_mode(select_character)
