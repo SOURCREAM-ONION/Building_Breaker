@@ -1,14 +1,14 @@
 from pico2d import *
 import game_world
 from character import Character
-from sword import Sword
 import game_framework
 import title_mode
 from building import create_random_building,Building
-from background import Background2, Background3, Background4, Background5 # 배경 클래스 임포트
+from background import Background # 배경 클래스 임포트
 from sword import Sword
+from coin import Coin
 
-current_map_class = Background2  # 현재 맵 클래스를 Background2로 설정
+current_map_class = Background  # 현재 맵 클래스를 Background로 설정
 current_character_class = Character # 현재 캐릭터 클래스를 Character로 설정
 current_sword_class = Sword # 현재 검 클래스를 Sword로 설정
 
@@ -53,10 +53,11 @@ def handle_events():
 
 score = 0
 score_timer = 0.0
+coin_spawn_timer = 0.0
 font = None
 
 def init():  # 월드가 새로 나올때 그려지는 부분
-    global running, character, world, sword, building, spawn_timer
+    global running, character, world, sword, building, spawn_timer, coin
     global score, score_timer, font # 점수와 타이머, 폰트 전역 변수 선언
 
     running = True
@@ -75,6 +76,9 @@ def init():  # 월드가 새로 나올때 그려지는 부분
     building = create_random_building() # 빌딩 객체 생성
     game_world.add_object(building, 1) # 빌딩을 월드의 0번 레이어에 추가
 
+    coin = Coin()
+    game_world.add_object(coin, 1)
+
     spawn_timer = 0.0
 
     # 점수 및 폰트 초기화
@@ -84,7 +88,7 @@ def init():  # 월드가 새로 나올때 그려지는 부분
 
 
 def update():  # 월드에 객체가 추가되는 부분
-    global spawn_timer, score, score_timer
+    global spawn_timer, score, score_timer, coin_spawn_timer
     game_world.update()
 
     # 점수 업데이트
@@ -92,6 +96,12 @@ def update():  # 월드에 객체가 추가되는 부분
     if score_timer >= 1.0:  # 1초마다 점수 증가
         score += 1  # 점수 10점 증가
         score_timer -= 0.0  # 타이머 초기화
+
+    coin_spawn_timer += game_framework.frame_time
+    if coin_spawn_timer >= 3.0:
+        new_coin = Coin()
+        game_world.add_object(new_coin, 1)
+        coin_spawn_timer = 0.0
 
     # 건물이 일정 위치에 도달하면 게임오버
     for obj in game_world.world[1]: # for문으로 월드의 0번 레이어 객체들 검사
@@ -179,7 +189,7 @@ def draw():  # 월드가 만들어지는 부분
 
     # 점수 표시
     if font:
-        font.draw(20, 680, f'{score}',(255,255,255))
+        font.draw(20, 680, f'Score : {score}',(255,255,255))
     update_canvas()
 
 

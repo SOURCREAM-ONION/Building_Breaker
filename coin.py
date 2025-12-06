@@ -1,12 +1,13 @@
 from pico2d import *
+import random
 
 class Coin:
     image = None
 
-    def __init__(self, x = 400, y = 300):
+    def __init__(self, x = None, y = 80):
         if Coin.image is None:
             Coin.image = load_image('ui/coin.png')
-        self.x = x
+        self.x = x if x is not None else random.randint(20, 700)
         self.y = y
         self.frame = 0
         self.total_frames = 4
