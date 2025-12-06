@@ -3,7 +3,9 @@ import game_framework
 import play_mode
 import title_mode
 import select_character
-from background import Background2, Background3, Background4, Background5
+from background import (Background2, Background3, Background4, Background5, Background6, Background7, Background8, Background9, Background10, Background11, Background12,
+                        Background13, Background14, Background15, Background16, Background17, Background18, Background19, Background20, Background21, Background22, Background23,
+                        Background24, Background25, Background26, Background27, Background28, Background29, Background30, Background31, Background32, Background33, Background34, Background35, Background36)
 
 direction_image = None
 
@@ -13,7 +15,10 @@ def init():
     global current_preview
     global direction_image
 
-    map_list = [Background2, Background3, Background4, Background5]
+    map_list = [Background2, Background3, Background4, Background5, Background6, Background7, Background8, Background9, Background10,
+                Background11, Background12, Background13, Background14, Background15, Background16, Background17, Background18, Background19,
+                Background20, Background21, Background22, Background23, Background24, Background25, Background26, Background27, Background28,
+                Background29, Background30, Background31, Background32, Background33, Background34, Background35, Background36]
     selection_index = 0
 
     current_preview = map_list[selection_index]()
