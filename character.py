@@ -5,14 +5,23 @@ from state_machine import StateMachine
 import game_framework
 import game_world
 
+# def mouse_left_click(e):
+#     return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONDOWN and e[1].button == SDL_BUTTON_LEFT # 마우스 좌클릭
+# def time_out(e):
+#     return e[0] == 'TIME_OUT' # 애니메이션 끝나는 이벤트
+# def mouse_right_click(e):
+#     return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONDOWN and e[1].button == SDL_BUTTON_RIGHT # 마우스 우클릭
+# def jump_key_press(e):
+#     return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_SPACE # 스페이스바 키 입력
+
 def mouse_left_click(e):
-    return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONDOWN and e[1].button == SDL_BUTTON_LEFT # 마우스 좌클릭
+    return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_z # z 키 입력 시 공격
 def time_out(e):
     return e[0] == 'TIME_OUT' # 애니메이션 끝나는 이벤트
 def mouse_right_click(e):
-    return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONDOWN and e[1].button == SDL_BUTTON_RIGHT # 마우스 우클릭
+    return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_DOWN # 아래 키 입력 시 방어
 def jump_key_press(e):
-    return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_SPACE # 스페이스바 키 입력
+    return e[0] == 'INPUT' and e[1].type == SDL_KEYDOWN and e[1].key == SDLK_UP # 위 키 입력 시 점프
 
 # 캐릭터의 시간변수
 # IDLE상태와 DEFENCE상태에서 공통으로 사용 (점프와 공격은 별도 처리)
@@ -230,9 +239,9 @@ class Character:
     def handle_event(self, event): # 이벤트가 발생했을 때 처리하는 부분
         # 캐릭터 좌우 이동
         if event.type == SDL_KEYDOWN:
-            if event.key == SDLK_a:
+            if event.key == SDLK_LEFT:
                 self.x -= 50
-            elif event.key == SDLK_d:
+            elif event.key == SDLK_RIGHT:
                 self.x += 50
 
         if self.x < 50:
