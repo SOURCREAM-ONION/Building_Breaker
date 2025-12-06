@@ -182,6 +182,13 @@ def update():  # 월드에 객체가 추가되는 부분
                     if character.velocity_y > 0: # 캐릭터가 점프 중(위로 올라가는 중)이라면
                         character.velocity_y = 0  # 상승력을 없애 바로 떨어지게 함
 
+    # 코인과 캐릭터의 충돌 체크
+    for obj in list(game_world.world[1]): # for문으로 월드의 1번 레이어 객체들 검사
+        if isinstance(obj, Coin):  # 코인 객체 찾기
+            coin_bb = obj.get_bb() # 코인의 충돌 박스 가져오기
+            if coin_bb and collide_bb(character_bb, coin_bb):# 코인과 캐릭터가 충돌했다면
+                game_world.remove_object(obj) # 코인 제거
+
 
 def draw():  # 월드가 만들어지는 부분
     clear_canvas()

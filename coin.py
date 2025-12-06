@@ -7,7 +7,7 @@ class Coin:
     def __init__(self, x = None, y = 80):
         if Coin.image is None:
             Coin.image = load_image('ui/coin.png')
-        self.x = x if x is not None else random.randint(20, 700)
+        self.x = x if x is not None else random.randint(50, 650)
         self.y = y
         self.frame = 0
         self.total_frames = 4
@@ -22,3 +22,7 @@ class Coin:
 
     def draw(self):
         self.image.clip_draw(self.frame * 1067, 0, 1067, 1067, self.x, self.y, 100, 100)
+        draw_rectangle(* self.get_bb())
+
+    def get_bb(self):
+        return self.x - 20, self.y - 20, self.x + 20, self.y + 20
