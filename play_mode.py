@@ -3,7 +3,7 @@ import game_world
 from character import Character
 import game_framework
 import title_mode
-from building import create_random_building,Building
+from building import create_random_building, Building, PIXEL_PER_METER, DROP_SPEED_KMPH
 from background import Background # 배경 클래스 임포트
 from game_framework import change_mode
 from sword import Sword
@@ -50,6 +50,7 @@ def handle_events():
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.change_mode(title_mode)
+            game_data.current_coin = 0 # 현재 코인 초기화
         elif event.type == SDL_MOUSEBUTTONDOWN or event.type == SDL_KEYDOWN:
             character.handle_event(event)
             sword.handle_event(event)
@@ -57,7 +58,6 @@ def handle_events():
 score = 0
 score_timer = 0.0
 coin_spawn_timer = 0.0
-current_coin = 0
 font = None
 
 def init():  # 월드가 새로 나올때 그려지는 부분
@@ -114,10 +114,9 @@ def update():  # 월드에 객체가 추가되는 부분
                 if obj.floors[i]['alive']: # 층이 살아있다면
                     floor_y = obj.y + obj.floors[i]['y_offset'] # 층의 현재 y 위치 계산
                      # 층의 바닥이 y=20 이하로 내려갔는지 확인
-                    if floor_y <= 150: # 게임 오버 조건
+                    if floor_y <= PIXEL_PER_METER * 2: # 게임 오버 조건
                         import game_over
                         game_framework.change_mode(game_over) # 게임 오버 모드로 전환
-                        current_coin = 0 # 현재 코인 초기화
                         return
 
     # # 빌딩 스폰 타이머 업데이트
@@ -173,7 +172,7 @@ def update():  # 월드에 객체가 추가되는 부분
                     bb = obj.get_bb_floor(i) # 층의 충돌 박스 가져오기
                     if bb and collide_bb(bb, sword.get_aa()): # 충돌 박스가 존재하고 충돌했다면
                         obj.push_up() # 빌딩 튕겨 올리기
-                        character.velocity_y = -800 # 캐릭터를 강제로 아래로 떨어뜨림
+                        character.velocity_y = -DROP_SPEED_KMPH * 60 # 캐릭터를 강제로 아래로 떨어뜨림
 
     character_bb = character.get_bb()  # 캐릭터의 현재 충돌 박스
 
@@ -193,7 +192,7 @@ def update():  # 월드에 객체가 추가되는 부분
             coin_bb = obj.get_bb() # 코인의 충돌 박스 가져오기
             if coin_bb and collide_bb(character_bb, coin_bb):# 코인과 캐릭터가 충돌했다면
                 game_data.total_coins += 1 # game_data파일의 total_coins 1 증가
-                current_coin += 1
+                game_data.current_coin += 1 # 현재 코인 1 증가
                 game_world.remove_object(obj) # 코인 제거
 
 
@@ -204,7 +203,6 @@ def draw():  # 월드가 만들어지는 부분
     # 점수 표시
     if font:
         font.draw(20, 680, f'Score : {int(score)}',(255,255,255))
-        font.draw(20, 640, f'Coins : {current_coin}',(255,255,0))
     update_canvas()
 
 
