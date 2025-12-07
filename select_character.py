@@ -4,6 +4,7 @@ import play_mode
 import select_map
 from character import Character,Char12, Char13, Char21, Char22, Char23, Char31, Char32, Char33, Char41, Char42, Char43, Char51, Char52, Char53
 import select_sword
+import game_data
 
 direction_image = None
 background = None
@@ -54,11 +55,12 @@ def draw():
     if background:
         background.draw()
 
-    current_character.draw()
+    if current_character:
+        current_character.draw()
 
     if direction_image:
-        direction_image.draw(430, 360, 100, 100)
-        direction_image.composite_draw(0, 'h', 50, 360, 100, 100)
+        direction_image.draw(430, 160, 100, 100)
+        direction_image.composite_draw(0, 'h', 50, 160, 100, 100)
 
     update_canvas()
 
@@ -72,14 +74,30 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_ESCAPE:
                 game_framework.change_mode(select_map) # esc 누르면 맵 선택으로 감
-            elif event.key == SDLK_LEFT: # 왼쪽 화살표 키 입력
+            elif event.key == SDLK_LEFT:
                 selection_index = (selection_index - 1) % len(character_list)
                 del current_character
                 current_character = character_list[selection_index]()
-            elif event.key == SDLK_RIGHT: # 오른쪽 화살표 키 입력
+                # 확대 이미지 그리기
+                clear_canvas()
+                if background: background.draw()
+                if current_character: current_character.draw()
+                direction_image.composite_draw(0, 'h', 60, 160, 120, 120)
+                direction_image.draw(430, 160, 100, 100)
+                update_canvas()
+                delay(0.1)
+            elif event.key == SDLK_RIGHT:
                 selection_index = (selection_index + 1) % len(character_list)
                 del current_character
                 current_character = character_list[selection_index]()
+                # 확대 이미지 그리기
+                clear_canvas()
+                if background: background.draw()
+                if current_character: current_character.draw()
+                direction_image.draw(420, 160, 120, 120)
+                direction_image.composite_draw(0, 'h', 50, 160, 100, 100)
+                update_canvas()
+                delay(0.1)
             elif event.key == SDLK_SPACE:
                 selected_character_class = character_list[selection_index]
                 play_mode.set_character_class(selected_character_class)

@@ -4,7 +4,7 @@ import select_map
 import select_character
 import play_mode
 from sword import Sword, WoodenSword, AncientSword, BloodSword, CheckinSword, CutterSword, GreenSword, IceSword, LibertySword, LightningSword, GoldenSword, NeptuneSword, NightSword, PinkSword, RosenSword, SharkSword, SyringeSword, BlackpinkSword
-
+import game_data
 
 direction_image = None
 background = None
@@ -64,8 +64,8 @@ def draw():
         current_sword.draw()
 
     if direction_image:
-        direction_image.draw(430, 360, 100, 100)
-        direction_image.composite_draw(0, 'h', 50, 360, 100, 100)
+        direction_image.draw(430, 160, 100, 100)
+        direction_image.composite_draw(0, 'h', 50, 160, 100, 100)
 
     update_canvas()
 
@@ -81,17 +81,30 @@ def handle_events():
                 game_framework.change_mode(select_character)
             elif event.key == SDLK_LEFT: # 왼쪽 화살표 키 입력
                 selection_index = (selection_index - 1) % len(sword_list)
-                direction_image.composite_draw(0, 'h', 60, 360, 120, 120)
-                update_canvas()
                 del current_sword
                 current_sword = sword_list[selection_index](character)
+                # 확대 이미지 그리기
+                clear_canvas()
+                if background: background.draw()
+                if character: character.draw()
+                if current_sword: current_sword.draw()
+                direction_image.composite_draw(0, 'h', 60, 160, 120, 120)
+                direction_image.draw(430, 160, 100, 100)
+                update_canvas()
+                delay(0.1)  # 0.1초 대기
             elif event.key == SDLK_RIGHT: # 오른쪽 화살표 키 입력
                 selection_index = (selection_index + 1) % len(sword_list)
-                direction_image.draw(430, 360, 100, 100)
-                direction_image.composite_draw(0, 'h', 50, 360, 100, 100)
-                update_canvas()
                 del current_sword
                 current_sword = sword_list[selection_index](character)
+                # 확대 이미지 그리기
+                clear_canvas()
+                if background: background.draw()
+                if character: character.draw()
+                if current_sword: current_sword.draw()
+                direction_image.draw(420, 160, 120, 120)
+                direction_image.composite_draw(0, 'h', 50, 160, 100, 100)
+                update_canvas()
+                delay(0.1)  # 0.1초 대기
             elif event.key == SDLK_SPACE:
                 selected_sword_class = sword_list[selection_index]
 

@@ -7,6 +7,7 @@ from background import (Background2, Background3, Background4, Background5, Back
                         Background13, Background14, Background15, Background16, Background17, Background18, Background19, Background20, Background21, Background22, Background23,
                         Background24, Background25, Background26, Background27, Background28, Background29, Background30, Background31, Background32, Background33, Background34, Background35, Background36)
 
+import game_data
 direction_image = None
 
 def init():
