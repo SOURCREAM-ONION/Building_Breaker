@@ -35,12 +35,15 @@ def handle_events():
     for event in event_list:
         if event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.change_mode(title_mode)
+            game_data.destroyed_buildings = 0 # 게임이 끝나면 파괴된 빌딩 수 초기화
+            game_data.current_coin = 0 # 현재 코인 초기화
 
 def draw():
     clear_canvas()
     image.draw_to_origin(0,0, 480, 720)
     font_gameover.draw(90, 530, 'Game Over', (255, 0, 0))
     font_esc.draw(115, 150, 'Press ESC to Title', (255, 255, 255))
+    font_coins.draw(140, 460, f'Destroyed Building: {game_data.destroyed_buildings}', (255, 255, 255))
     font_score.draw(150, 390, f'Score: {int(play_mode.score)}', (255, 255, 255))
     font_coins.draw(140, 320, f'Collected Coins: {game_data.current_coin}', (255, 255, 255))
 

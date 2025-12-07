@@ -137,6 +137,7 @@ def update():  # 월드에 객체가 추가되는 부분
 
             if all_destroyed: # 모든 층이 파괴되었다면
                 game_world.remove_object(obj) # 빌딩 제거
+                game_data.destroyed_buildings += 1 # 파괴한 빌딩 수 증가
 
     # 빌딩이 하나도 없으면 새 빌딩 생성
     building_exists = False
