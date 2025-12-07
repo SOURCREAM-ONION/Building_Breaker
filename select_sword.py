@@ -4,7 +4,7 @@ import select_map
 import select_character
 import play_mode
 from sword import Sword, WoodenSword, AncientSword, BloodSword, CheckinSword, CutterSword, GreenSword, IceSword, LibertySword, LightningSword, GoldenSword, NeptuneSword, NightSword, PinkSword, RosenSword, SharkSword, SyringeSword, BlackpinkSword
-import game_data
+from coin import CoinBox
 
 direction_image = None
 background = None
@@ -24,7 +24,7 @@ def set_character_class(cls):
 
 def init():
     global sword_list, selection_index, current_sword
-    global direction_image, background, character
+    global direction_image, background, character, coin_box
 
     sword_list = [Sword, WoodenSword, AncientSword, BloodSword, CheckinSword, CutterSword, GreenSword, IceSword, LibertySword, LightningSword, GoldenSword, NeptuneSword, NightSword, PinkSword, RosenSword, SharkSword, SyringeSword, BlackpinkSword]
     selection_index = 0
@@ -39,6 +39,7 @@ def init():
         current_sword = sword_list[selection_index](character)
 
     direction_image = load_image("ui/Direction_21.png")
+    coin_box = CoinBox()
 
 def finish():
     global current_sword, direction_image, background, character
@@ -67,6 +68,9 @@ def draw():
         direction_image.draw(430, 160, 100, 100)
         direction_image.composite_draw(0, 'h', 50, 160, 100, 100)
 
+    if coin_box:
+        coin_box.draw()
+
     update_canvas()
 
 def handle_events():
@@ -90,6 +94,7 @@ def handle_events():
                 if current_sword: current_sword.draw()
                 direction_image.composite_draw(0, 'h', 60, 160, 120, 120)
                 direction_image.draw(430, 160, 100, 100)
+                coin_box.draw()
                 update_canvas()
                 delay(0.1)  # 0.1초 대기
             elif event.key == SDLK_RIGHT: # 오른쪽 화살표 키 입력
@@ -103,6 +108,7 @@ def handle_events():
                 if current_sword: current_sword.draw()
                 direction_image.draw(420, 160, 120, 120)
                 direction_image.composite_draw(0, 'h', 50, 160, 100, 100)
+                coin_box.draw()
                 update_canvas()
                 delay(0.1)  # 0.1초 대기
             elif event.key == SDLK_SPACE:

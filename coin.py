@@ -34,10 +34,10 @@ class CoinBox:
         self.image = load_image("ui/coinbox.png")
 
         self.font = load_font('ui/ENCR10B.ttf', 30)
-        self.x = 1150
+        self.x = 380
         self.y = 680
 
     def draw(self):
         # 상자 그리기
         self.image.draw(self.x, self.y, 200, 65)
-        self.font.draw(self.x - 20, self.y, f'{game_data.total_coins}', (50, 50, 50))
+        self.font.draw(self.x - 20 , self.y, f'{game_data.total_coins}', (50, 50, 50))

@@ -4,7 +4,7 @@ import play_mode
 import select_map
 from character import Character,Char12, Char13, Char21, Char22, Char23, Char31, Char32, Char33, Char41, Char42, Char43, Char51, Char52, Char53
 import select_sword
-import game_data
+from coin import CoinBox
 
 direction_image = None
 background = None
@@ -24,6 +24,10 @@ def init():
     global current_character
     global direction_image
     global background
+    global coin_box
+
+    coin_box = CoinBox()
+
 
     character_list = [Character, Char12, Char13, Char21, Char22, Char23, Char31, Char32, Char33, Char41, Char42, Char43, Char51, Char52, Char53]
     selection_index = 0
@@ -58,9 +62,13 @@ def draw():
     if current_character:
         current_character.draw()
 
+    if coin_box:
+        coin_box.draw()
+
     if direction_image:
         direction_image.draw(430, 160, 100, 100)
         direction_image.composite_draw(0, 'h', 50, 160, 100, 100)
+
 
     update_canvas()
 
@@ -84,6 +92,7 @@ def handle_events():
                 if current_character: current_character.draw()
                 direction_image.composite_draw(0, 'h', 60, 160, 120, 120)
                 direction_image.draw(430, 160, 100, 100)
+                coin_box.draw()
                 update_canvas()
                 delay(0.1)
             elif event.key == SDLK_RIGHT:
@@ -96,6 +105,7 @@ def handle_events():
                 if current_character: current_character.draw()
                 direction_image.draw(420, 160, 120, 120)
                 direction_image.composite_draw(0, 'h', 50, 160, 100, 100)
+                coin_box.draw()
                 update_canvas()
                 delay(0.1)
             elif event.key == SDLK_SPACE:

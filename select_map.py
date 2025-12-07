@@ -8,6 +8,9 @@ from background import (Background2, Background3, Background4, Background5, Back
                         Background24, Background25, Background26, Background27, Background28, Background29, Background30, Background31, Background32, Background33, Background34, Background35, Background36)
 
 import game_data
+from coin import CoinBox
+
+
 direction_image = None
 
 def init():
@@ -15,6 +18,9 @@ def init():
     global selection_index
     global current_preview
     global direction_image
+    global coin_box
+
+    coin_box = CoinBox()
 
     map_list = [Background2, Background3, Background4, Background5, Background6, Background7, Background8, Background9, Background10,
                 Background11, Background12, Background13, Background14, Background15, Background16, Background17, Background18, Background19,
@@ -43,6 +49,8 @@ def draw():
     if direction_image:
         direction_image.draw(430, 360, 100, 100)
         direction_image.composite_draw(0, 'h', 50, 360, 100, 100)
+
+    coin_box.draw()
 
     update_canvas()
 

@@ -3,6 +3,7 @@ import game_framework
 import play_mode
 import title_mode
 import game_data
+from coin import CoinBox
 
 image = None
 font_gameover = None
@@ -11,7 +12,9 @@ font_score = None
 font_coins = None
 
 def init():
-    global image, font_gameover, font_esc, font_score,font_coins
+    global image, font_gameover, font_esc, font_score, font_coins, coin_box
+
+    coin_box = CoinBox()
     image = load_image('background/EndBackground.png')
     font_gameover = load_font('ui/ENCR10B.ttf', 60)
     font_esc = load_font('ui/ENCR10B.ttf', 25)
@@ -19,13 +22,14 @@ def init():
     font_coins = load_font('ui/ENCR10B.ttf', 25)
 
 def finish():
-    global image, font_gameover, font_esc, font_score, font_coins
+    global image, font_gameover, font_esc, font_score, font_coins, coin_box
 
     del image
     del font_gameover
     del font_esc
     del font_score
     del font_coins
+    del coin_box
 
 def update():
     pass
@@ -46,5 +50,6 @@ def draw():
     font_coins.draw(140, 460, f'Destroyed Building: {game_data.destroyed_buildings}', (255, 255, 255))
     font_score.draw(150, 390, f'Score: {int(play_mode.score)}', (255, 255, 255))
     font_coins.draw(140, 320, f'Collected Coins: {game_data.current_coin}', (255, 255, 255))
+    coin_box.draw()
 
     update_canvas()
