@@ -1,6 +1,7 @@
 from pico2d import *
 import random
 import game_data
+import play_mode
 
 class Coin:
     image = None
@@ -22,8 +23,9 @@ class Coin:
             self.delay_counter = 0
 
     def draw(self):
-        self.image.clip_draw(self.frame * 1067, 0, 1067, 1067, self.x, self.y, 100, 100)
-        draw_rectangle(* self.get_bb())
+        screen_y = self.y - play_mode.camera_y
+        self.image.clip_draw(self.frame * 1067, 0, 1067, 1067, self.x, screen_y, 100, 100)
+        draw_rectangle(self.x - 20, screen_y - 20, self.x + 20, screen_y + 20)
 
     def get_bb(self):
         return self.x - 20, self.y - 20, self.x + 20, self.y + 20
