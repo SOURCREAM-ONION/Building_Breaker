@@ -125,7 +125,7 @@ def update():  # 월드에 객체가 추가되는 부분
                 if obj.floors[i]['alive']: # 층이 살아있다면
                     floor_y = obj.y + obj.floors[i]['y_offset'] # 층의 현재 y 위치 계산
                      # 층의 바닥이 y=20 이하로 내려갔는지 확인
-                    if floor_y <= PIXEL_PER_METER * 2: # 게임 오버 조건
+                    if floor_y <= PIXEL_PER_METER * 3: # 게임 오버 조건
                         import game_over
                         game_framework.change_mode(game_over) # 게임 오버 모드로 전환
                         return
@@ -192,6 +192,9 @@ def update():  # 월드에 객체가 추가되는 부분
     for obj in game_world.world[1]: # for문으로 월드의 1번 레이어 객체들 검사
         if isinstance(obj, Building):  # 빌딩 객체 찾기
             for i in range(obj.num_floors): # 각 층을 검사
+                floor_y = obj.y + obj.floors[i]['y_offset'] # 층의 현재 y 위치 계산
+                if floor_y < 230: # 빌딩이 60까지 내려오면
+                    continue # 캐릭터와의 충돌체크 X
                 floor_bb = obj.get_bb_floor(i) # 층의 충돌 박스 가져오기
                 if floor_bb and collide_bb(character_bb, floor_bb):# 건물의 층과 캐릭터가 충돌했다면
                     character.y = floor_bb[1] - 50 # 캐릭터를 층 위에 위치시킴
