@@ -98,27 +98,27 @@ class Building:
 # 빌딩의 자식 클래스 (빌딩 자식 클래스의 숫자는 파일의 숫자와 같게 함)
 class Building52(Building):
     def __init__(self):
-        super().__init__('building/Building52.png', num_floors=7)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        Building.__init__(self,'building/Building52.png', num_floors=7)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
         print("52 자식 클래스 초기화 완료") # 디버그 메시지
 
 class Building41(Building):
     def __init__(self):
-        super().__init__('building/Building41.png', num_floors=11)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        Building.__init__(self,'building/Building41.png', num_floors=11)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
         print("41 자식 클래스 초기화 완료") # 디버그 메시지
 
 class Building33(Building):
     def __init__(self):
-        super().__init__('building/Building33.png', num_floors=7)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        Building.__init__(self,'building/Building33.png', num_floors=7)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
         print("33 자식 클래스 초기화 완료") # 디버그 메시지
 
 class Building4(Building):
     def __init__(self):
-        super().__init__('building/Building4.png', num_floors=11)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        Building.__init__(self,'building/Building4.png', num_floors=11)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
         print("4 자식 클래스 초기화 완료") # 디버그 메시지
 
 class Building32(Building):
     def __init__(self):
-        super().__init__('building/Building32.png', num_floors=7)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        Building.__init__(self,'building/Building32.png', num_floors=7)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
         print("32 자식 클래스 초기화 완료") # 디버그 메시지
 
 def create_random_building():
