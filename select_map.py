@@ -20,7 +20,7 @@ direction_image = None
 
 def init():
     global map_list, direction_image, current_preview, selection_index # 맵 선택 관련 글로벌 변수
-    global coin_box, map_prices, unlock_status, font_unlock, notification_msg, notification_timer, font_notification # 상점 관련 글로벌 변수
+    global coin_box, map_prices, font_unlock, notification_msg, notification_timer, font_notification # 상점 관련 글로벌 변수
 
     coin_box = CoinBox()
 
@@ -53,11 +53,12 @@ def init():
 def finish():
     global current_preview
     global direction_image
-    global font_unlock
+    global font_unlock,font_notification
 
     del current_preview
     del direction_image
     del font_unlock
+    del font_notification
 
 def update():
     pass
@@ -88,7 +89,7 @@ def draw():
     update_canvas()
 
 def handle_events():
-    global selection_index, current_preview, unlock_status, notification_msg, notification_timer
+    global selection_index, current_preview, notification_msg, notification_timer
 
     events = get_events()
     for event in events:
