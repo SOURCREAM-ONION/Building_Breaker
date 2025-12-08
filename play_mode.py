@@ -161,7 +161,7 @@ def update():  # 월드에 객체가 추가되는 부분
                     bb = obj.get_bb_floor(i) # 층의 충돌 박스 가져오기
                     if bb and collide_bb(bb, sword.get_bb()): # 충돌 박스가 존재하고 충돌했다면
                         if (obj, i) not in sword.hit_list: # 이미 히트리스트에 없다면
-                            obj.take_damage(i,1) # 해당 층에 데미지 1 입히기
+                            obj.take_damage(i,sword.damage) # 해당 층에 데미지 1 입히기
                             sword.hit_list.append((obj, i)) # 히트리스트에 추가
 
                             if not obj.floors[i]['alive']: # 만약 해당 층이 파괴되었다면
