@@ -10,12 +10,17 @@ from background import (Background2, Background3, Background4, Background5, Back
 import game_data
 from coin import CoinBox
 
+map_prices = []
+
+# 알림
+notification_msg = None
+notification_timer = 0.0 # 알림 타이머
 
 direction_image = None
 
 def init():
     global map_list, direction_image, current_preview, selection_index # 맵 선택 관련 글로벌 변수
-    global coin_box, map_prices, unlock_status, font_unlock # 상점 관련 글로벌 변수
+    global coin_box, map_prices, unlock_status, font_unlock, notification_msg, notification_timer, font_notification # 상점 관련 글로벌 변수
 
     coin_box = CoinBox()
 
@@ -27,20 +32,23 @@ def init():
     selection_index = 0
     current_preview = map_list[selection_index]()
     direction_image = load_image("ui/Direction_21.png")
-    font_unlock = load_font("ui/ENCR10B.TTF", 20)
+    font_unlock = load_font("ui/ENCR10B.TTF", 40)
+    font_notification = load_font("ui/ENCR10B.TTF", 20)
 
     map_prices = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-                  ,1, 1, 1, 1, 1]
+                  1, 1, 2, 2, 2, 2, 2, 3, 4, 5,
+                  5, 5, 5, 5, 5, 6, 6, 7, 8, 8
+                  ,9, 10, 15, 20, 25]
 
-    # 해금상태 초기와 = 기본 맵 해금
-    unlock_status = []
+    # 잠금 해제 상태 초기화
     for price in map_prices:
         if price == 0:
-            unlock_status.append(True)
+            game_data.unlocked_maps.append(True)
         else:
-            unlock_status.append(False)
+            game_data.unlocked_maps.append(False)
+
+    notification_msg = None
+    notification_timer = 0.0
 
 def finish():
     global current_preview
@@ -64,15 +72,23 @@ def draw():
 
     coin_box.draw()
 
+    is_unlocked = game_data.unlocked_maps[selection_index]
+
     # 맵이 잠겼을 때 나오는 문구
-    if not unlock_status[selection_index]:
-        font_unlock.draw(140, 600, "LOCKED", (255, 0, 0))
-        font_unlock.draw(120, 550, f"{map_prices[selection_index]} Coin", (255, 255, 255))
+    if not is_unlocked:
+        font_unlock.draw(160, 600, "LOCKED", (255, 0, 0))
+        font_unlock.draw(120, 550, f"Price: {map_prices[selection_index]}", (255, 255, 255))
+        # 구매 안내 문구 추가
+        font_unlock.draw(70, 200, "[Space] to Buy", (200, 200, 200))
+
+    # 알림 메시지 출력
+    if notification_msg and get_time() < notification_timer:
+        font_notification.draw(130, 400, notification_msg, (255, 255, 0))
 
     update_canvas()
 
 def handle_events():
-    global selection_index, current_preview
+    global selection_index, current_preview, unlock_status, notification_msg, notification_timer
 
     events = get_events()
     for event in events:
@@ -93,17 +109,23 @@ def handle_events():
                 update_canvas()
                 del current_preview
                 current_preview = map_list[selection_index]()
+            # 잠금 해제된 맵일 때 게임실행
             elif event.key == SDLK_SPACE:
-                if unlock_status[selection_index]: # 잠금 해제된 맵일 때 게임실행
+                if game_data.unlocked_maps[selection_index]:
                     selected_class = map_list[selection_index]
                     select_character.set_background(selected_class)
                     play_mode.set_background_class(selected_class)
                     game_framework.change_mode(select_character)
                 else:
+                    #잠겨있으면 구매 시도
                     price = map_prices[selection_index]
-                    if game_data.current_coin >= price:
-                        game_data.current_coin -= price
-                        unlock_status[selection_index] = True
-                        print(f'Map {selection_index} unlocked!')
+
+                    if game_data.total_coins >= price:
+                        game_data.total_coins -= price
+                        game_data.unlocked_maps[selection_index] = True  # game_data에 저장
+
+                        notification_msg = f"Map {selection_index} Unlocked!"
+                        notification_timer = get_time() + 1.0
                     else:
-                        print('Not enough coins to unlock this map.')
+                        notification_msg = "Not enough coins!"
+                        notification_timer = get_time() + 1.0
