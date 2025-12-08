@@ -101,6 +101,10 @@ def draw():
         # 구매 안내 문구 추가
         font_unlock.draw(70, 200, "[Space] to Buy", (200, 200, 200))
 
+        # 알림 메시지 출력
+    if notification_msg and get_time() < notification_timer:
+        font_notification.draw(130, 400, notification_msg, (255, 255, 0))
+
     update_canvas()
 
 def handle_events():
@@ -154,7 +158,7 @@ def handle_events():
                         game_data.total_coins -= price
                         game_data.unlocked_swords[selection_index] = True  # game_data에 저장
 
-                        notification_msg = f"Map {selection_index} Unlocked!"
+                        notification_msg = f"{sword_list[selection_index].__name__} Unlocked!"
                         notification_timer = get_time() + 1.0
                     else:
                         notification_msg = "Not enough coins!"
