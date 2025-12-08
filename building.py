@@ -121,7 +121,42 @@ class Building32(Building):
         Building.__init__(self,'building/Building32.png', num_floors=7)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
         print("32 자식 클래스 초기화 완료") # 디버그 메시지
 
+class Building2(Building):
+    def __init__(self):
+        Building.__init__(self,'building/Building2.png', num_floors=11)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        print("2 자식 클래스 초기화 완료") # 디버그 메시지
+
+class Building5(Building):
+    def __init__(self):
+        Building.__init__(self,'building/Building5.png', num_floors=9)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        print("5 자식 클래스 초기화 완료") # 디버그 메시지
+
+class Building10(Building):
+    def __init__(self):
+        Building.__init__(self,'building/Building10.png', num_floors=9)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        print("10 자식 클래스 초기화 완료") # 디버그 메시지
+
+class Building12(Building):
+    def __init__(self):
+        Building.__init__(self,'building/Building12.png', num_floors=9)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        print("12 자식 클래스 초기화 완료") # 디버그 메시지
+
+class Building13(Building):
+    def __init__(self):
+        Building.__init__(self,'building/Building13.png', num_floors=9)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        print("13 자식 클래스 초기화 완료") # 디버그 메시지
+
+class Building45(Building):
+    def __init__(self):
+        Building.__init__(self,'building/Building45.png', num_floors=10)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        print("45 자식 클래스 초기화 완료") # 디버그 메시지
+
+class Building46(Building):
+    def __init__(self):
+        Building.__init__(self,'building/Building46.png', num_floors=10)  # 부모의 __init__ 호출 (super의 기능 = 부모클래스의 메서드 호출)
+        print("46 자식 클래스 초기화 완료") # 디버그 메시지
+
 def create_random_building():
-    buildings = [Building,Building41,Building52,Building33,Building4,Building32]
-    #buildings = [Building32] # 한개씩 테스트 할 때
+    #buildings = [Building,Building41,Building52,Building33,Building4,Building32,Building2,Building5,Building10,Building12,Building13,Building45,Building46]
+    buildings = [Building13] # 한개씩 테스트 할 때
     return random.choice(buildings)()
