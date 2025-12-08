@@ -151,7 +151,7 @@ def update():  # 월드에 객체가 추가되는 부분
     if not building_exists: # 빌딩이 없으면
         new_building = create_random_building() # 새 빌딩 생성
         game_world.add_object(new_building, 1) # 월드에 추가
-        print("새 빌딩 생성됨") # 디버그 메시지
+        # print("새 빌딩 생성됨") # 디버그 메시지
 
     # 검 공격 중일 때 모든 빌딩과 충돌 체크
     if sword.is_attacking(): # 검을 휘두르는 중이라면
@@ -229,6 +229,8 @@ def draw():  # 월드가 만들어지는 부분
 
 
 def finish():  # 월드가 사라질때 지워지는 부분
-    global font
+    global font, camera_y
     if font:
         del font
+
+    camera_y = 0
