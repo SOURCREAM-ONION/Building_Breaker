@@ -5,3 +5,4 @@ current_coin = 0 # 게임에서 얻은 동전 개수 (현재 플레이 모드에
 destroyed_buildings = 0 # 파괴한 빌딩의 총 개수
 
 unlocked_maps = []
+unlocked_characters = []
