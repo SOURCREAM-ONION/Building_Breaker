@@ -6,3 +6,4 @@ destroyed_buildings = 0 # 파괴한 빌딩의 총 개수
 
 unlocked_maps = []
 unlocked_characters = []
+unlocked_swords = []
