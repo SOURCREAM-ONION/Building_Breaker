@@ -19,6 +19,7 @@ class Building:
     def __init__(self, image_file='building/Building1.png', num_floors=9): # 기본 건물 이미지 파일과 층 수
         self.x, self.y = 240, 2000  # 건물의 초기 위치
         self.building = load_image(image_file)  # 건물 이미지 로드
+        self.crack_image = load_image('ui/Crack.png') # 균열 이미지 로드
         self.framex = 480  # 건물 프레임 크기 x
         self.framey = 150  # 건물 프레임 크기 y
 
@@ -29,7 +30,8 @@ class Building:
                 'clip_y': i * 307, # 각 층의 클립 y 위치
                 'y_offset': i * 150, # 각 층의 y 오프셋
                 'alive': True, # 층이 살아있는지 여부
-                'hp' : Building.based_foors_hp # 각 층의 체력
+                'hp' : Building.based_foors_hp, # 각 층의 체력
+                'max_hp' : Building.based_foors_hp # 각 층의 최대 체력
             })
 
         self.num_floors = num_floors # 층 수 저장
@@ -79,6 +81,11 @@ class Building:
                 self.building.clip_draw(0, floor['clip_y'], 1080, 307,
                                         self.x, screen_y,
                                         self.framex, self.framey)
+
+                if floor['max_hp'] > 0:
+                    hp_ratio = floor['hp'] / floor['max_hp']
+                    if hp_ratio <= 0.25:
+                        self.crack_image.draw(self.x, screen_y, self.framex, self.framey)
 
         # 충돌 박스 그리기 (디버깅용)
         for i in range(self.num_floors):
