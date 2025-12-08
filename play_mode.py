@@ -49,6 +49,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.change_mode(title_mode)
             game_data.current_coin = 0 # 현재 코인 초기화
+            Building.based_floors_hp = 1 # 빌딩 체력 초기화
         elif event.type == SDL_MOUSEBUTTONDOWN or event.type == SDL_KEYDOWN:
             character.handle_event(event)
             sword.handle_event(event)
@@ -118,6 +119,7 @@ def update():  # 월드에 객체가 추가되는 부분
                     if floor_y <= PIXEL_PER_METER * 3: # 게임 오버 조건
                         import game_over
                         game_framework.change_mode(game_over) # 게임 오버 모드로 전환
+                        Building.based_floors_hp = 1 # 빌딩 체력 초기화
                         return
 
     # # 빌딩 스폰 타이머 업데이트
@@ -139,7 +141,7 @@ def update():  # 월드에 객체가 추가되는 부분
             if all_destroyed: # 모든 층이 파괴되었다면
                 game_world.remove_object(obj) # 빌딩 제거
                 game_data.destroyed_buildings += 1 # 파괴한 빌딩 수 증가
-                Building.based_foors_hp += 1 # 다음 빌딩의 체력 증가
+                Building.based_floors_hp += 1 # 다음 빌딩의 체력 증가
 
     # 빌딩이 하나도 없으면 새 빌딩 생성
     building_exists = False
