@@ -251,8 +251,8 @@ class Character:
         import play_mode
         self.state_machine.draw()
         # 충돌 박스도 카메라에 맞춰 이동 (디버그용 사각형)
-        sx, sy = self.x, self.y - play_mode.camera_y
-        draw_rectangle(sx - 30, sy - 0, sx + 30, sy + 40)
+        # sx, sy = self.x, self.y - play_mode.camera_y
+        # draw_rectangle(sx - 30, sy - 0, sx + 30, sy + 40)
 
     # 이벤트가 발생했을 때 처리하는 부분
     def handle_event(self, event):

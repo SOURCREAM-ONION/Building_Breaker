@@ -26,7 +26,7 @@ class Coin:
     def draw(self):
         screen_y = self.y - play_mode.camera_y # 카메라 위치에 따른 y 좌표 계산
         self.image.clip_draw(self.frame * 1067, 0, 1067, 1067, self.x, screen_y, 100, 100) # 동전 그리기 (캐릭터가 위로 올라가도 동전은 그대로)
-        draw_rectangle(self.x - 20, screen_y - 20, self.x + 20, screen_y + 20)
+        # draw_rectangle(self.x - 20, screen_y - 20, self.x + 20, screen_y + 20)
 
     def get_bb(self):
         return self.x - 20, self.y - 20, self.x + 20, self.y + 20

@@ -153,14 +153,14 @@ class Sword:
     def draw(self):
         import play_mode
         self.state_machine.draw()
-        cy = play_mode.camera_y
-
-        if self.state_machine.current_state == self.WIELD_SWORD:
-            l, b, r, t = self.get_bb()
-            draw_rectangle(l, b - cy, r, t - cy)
-        elif self.state_machine.current_state == self.DEFENCE_SWORD:
-            l, b, r, t = self.get_aa()
-            draw_rectangle(l, b - cy, r, t - cy)
+        # cy = play_mode.camera_y
+        #
+        # if self.state_machine.current_state == self.WIELD_SWORD:
+        #     l, b, r, t = self.get_bb()
+        #     draw_rectangle(l, b - cy, r, t - cy)
+        # elif self.state_machine.current_state == self.DEFENCE_SWORD:
+        #     l, b, r, t = self.get_aa()
+        #     draw_rectangle(l, b - cy, r, t - cy)
 
     # 검의 방어 충돌박스
     def get_aa(self):
