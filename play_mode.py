@@ -60,6 +60,7 @@ def handle_events():
             action = pause_menu.handle_event(event)
             if action == 'restart':
                 paused = False
+                Building.based_floors_hp = 1  # 빌딩 체력 초기화
                 init()
             elif action == 'quit':
                 paused = False
@@ -160,7 +161,15 @@ def update():  # 월드에 객체가 추가되는 부분
             if all_destroyed: # 모든 층이 파괴되었다면
                 game_world.remove_object(obj) # 빌딩 제거
                 game_data.destroyed_buildings += 1 # 파괴한 빌딩 수 증가
-                Building.based_floors_hp += 1 # 다음 빌딩의 체력 증가
+                if 1 <= Building.based_floors_hp < 10: # 10단계 까지
+                    Building.based_floors_hp += 1 # 다음 빌딩의 체력 증가
+                if 10 <= Building.based_floors_hp < 30: # hp가 10~30단계 까지
+                    Building.based_floors_hp += 2 # 빌딩 체력 상한선 설정
+                if 30 <= Building.based_floors_hp < 60: # hp가 30~60단계 까지
+                    Building.based_floors_hp += 3 # 빌딩 체력 상한선 설정
+                if 60 <= Building.based_floors_hp < 100: # hp가 60~100단계 까지
+                    Building.based_floors_hp += 4 # 빌딩 체력 상한선 설정
+
 
     # 빌딩이 하나도 없으면 새 빌딩 생성
     building_exists = False
