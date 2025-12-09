@@ -1,6 +1,6 @@
 from pico2d import *
 import random
-import game_framework
+import game_framework, ui
 
 # 상수 정의
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
@@ -63,6 +63,11 @@ class Building:
         if 0 <= floor_num < len(self.floors):
             self.floors[floor_num]['alive'] = False # 해당 층을 파괴 상태로 변경
             # print(f"{floor_num + 1}층 파괴됨!")
+
+            floor_y = self.y + self.floors[floor_num]['y_offset']
+
+            # 파편 생성 함수 호출 (x좌표, y좌표, 파편 개수)
+            ui.create_debris(self.x, floor_y, count=15)
 
     # 건물이 튕겨지는 함수
     def push_up(self):
