@@ -246,6 +246,8 @@ def update():  # 월드에 객체가 추가되는 부분
     if camera_y < 0:
         camera_y = 0
 
+    sword.update_position()
+
 
 
 def draw():  # 월드가 만들어지는 부분

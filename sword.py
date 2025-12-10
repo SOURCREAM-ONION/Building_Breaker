@@ -181,6 +181,17 @@ class Sword:
     def is_defending(self):
         return self.state_machine.current_state == self.DEFENCE_SWORD
 
+    def update_position(self):
+        if self.state_machine.current_state == self.IDLE_SWORD:
+            self.x = self.character.x + 44
+            self.y = self.character.y
+        elif self.state_machine.current_state == self.WIELD_SWORD:
+            self.x = self.character.x
+            self.y = self.character.y + 46
+        elif self.state_machine.current_state == self.DEFENCE_SWORD:
+            self.x = self.character.x - 80
+            self.y = self.character.y - 55
+
     def handle_event(self, event):
         # 방어 입력 시 쿨다운 체크
         if mouse_right_click(('INPUT', event)):
