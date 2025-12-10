@@ -18,8 +18,11 @@ BOUNCE_SPEED_PPS = (BOUNCE_SPEED_MPS * PIXEL_PER_METER)
 # Building의 부모클래스 정의
 class Building:
     based_floors_hp = 1
+    image = None  # 클래스 변수로 이미지 로드 (공유)
 
     def __init__(self, image_file='building/Building1.png', num_floors=9): # 기본 건물 이미지 파일과 층 수
+        if Building.image == None:
+            Building.image = image_file
         self.x, self.y = 240, 2000  # 건물의 초기 위치
         self.building = load_image(image_file)  # 건물 이미지 로드
         self.crack_image1 = load_image('ui/Crack_01.png') # 균열 이미지 로드 (덜 손상)

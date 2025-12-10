@@ -30,8 +30,6 @@ class Idle_Sword:
 
 # 검 휘두르기 상태
 class Wield_Sword:
-    images = None
-
     def __init__(self, sword):
         self.x, self.y = 200, 53
         self.sword = sword
@@ -80,8 +78,6 @@ class Wield_Sword:
 
 # 검 방어 상태
 class Defence_Sword:
-    images = None
-
     def __init__(self, sword):
         self.sword = sword
         self.frame = 0 # 검 방어 애니메이션 프레임 초기화
