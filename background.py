@@ -6,9 +6,19 @@ class Background:
     def __init__(self, image_name):
         self.image = load_image(image_name)
         self.bgm = load_music('sound/bgm.mp3')
-        self.bgm.set_volume(100)
-        self.bgm.play()
+        if not Background.bgm:
+            Background.bgm = load_music('sound/bgm.mp3')
+            Background.bgm.set_volume(100)
 
+    def play_bgm(self):
+        """BGM 재생 메서드 - play_mode에서만 호출"""
+        if Background.bgm:
+            Background.bgm.repeat_play()
+
+    def stop_bgm(self):
+        """BGM 정지 메서드"""
+        if Background.bgm:
+            Background.bgm.stop()
 
     def update(self):
         pass

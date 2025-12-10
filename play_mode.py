@@ -72,7 +72,7 @@ def handle_events():
             sword.handle_event(event)
 
 def init():  # 월드가 새로 나올때 그려지는 부분
-    global running, character, world, sword, building, spawn_timer, coin
+    global running, character, world, sword, building, spawn_timer, coin, background
     global score, score_timer, font, camera_y, paused, pause_menu # 점수와 타이머, 폰트 전역 변수 선언
 
     camera_y = 0
@@ -87,6 +87,7 @@ def init():  # 월드가 새로 나올때 그려지는 부분
 
     background = current_map_class()
     game_world.add_object(background, 0) # 배경을 월드의 0번 레이어에 추가
+    background.play_bgm()
 
     character = current_character_class() # 캐릭터 객체 생성
     game_world.add_object(character, 1) # 캐릭터를 월드의 1번 레이어에 추가
@@ -267,8 +268,12 @@ def draw():  # 월드가 만들어지는 부분
 
 
 def finish():  # 월드가 사라질때 지워지는 부분
-    global font, camera_y
+    global font, camera_y, background
     if font:
         del font
+
+    if background:
+        background.stop_bgm()  # 게임 종료 시 BGM 정지
+        del background
 
     camera_y = 0
