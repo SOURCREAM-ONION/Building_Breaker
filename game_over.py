@@ -10,9 +10,10 @@ font_gameover = None
 font_esc = None
 font_score = None
 font_coins = None
+game_over_sound = None
 
 def init():
-    global image, font_gameover, font_esc, font_score, font_coins, coin_box
+    global image, font_gameover, font_esc, font_score, font_coins, coin_box, game_over_sound
 
     coin_box = CoinBox()
     image = load_image('background/EndBackground.png')
@@ -20,6 +21,10 @@ def init():
     font_esc = load_font('ui/ENCR10B.ttf', 25)
     font_score = load_font('ui/ENCR10B.ttf', 30)
     font_coins = load_font('ui/ENCR10B.ttf', 25)
+
+if not game_over_sound:
+    game_over_sound = load_wav('sound/tubure.wav')
+    game_over_sound.set_volume(64)
 
 def finish():
     global image, font_gameover, font_esc, font_score, font_coins, coin_box

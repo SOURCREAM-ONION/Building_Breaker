@@ -138,6 +138,7 @@ def update():  # 월드에 객체가 추가되는 부분
                      # 층의 바닥이 y=20 이하로 내려갔는지 확인
                     if floor_y <= PIXEL_PER_METER * 3: # 게임 오버 조건
                         import game_over
+                        game_over.game_over_sound.play()
                         game_framework.change_mode(game_over) # 게임 오버 모드로 전환
                         Building.based_floors_hp = 1 # 빌딩 체력 초기화
                         return
