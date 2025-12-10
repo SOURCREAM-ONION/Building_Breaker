@@ -214,7 +214,7 @@ class Character:
         self.velocity_y = 0 # 캐릭터의 수직 속도 초기화
         self.image = load_image('character/Char1_1.png') # 캐릭터의 이미지 로드
         self.last_defence_time = 0.0 # 마지막 방어 시간 초기화
-        self.defence_cooltime = 2.0 # 방어 쿨타임 설정 (초단위)
+        self.defence_cooltime = 1.5 # 방어 쿨타임 설정 (초단위)
 
         self.IDLE = Idle(self) # Idle 상태 생성
         self.ATTACK = Attack(self) # Attack 상태 생성

@@ -6,6 +6,7 @@ import game_framework
 
 # 검 대기 상태
 class Idle_Sword:
+    images = None
     def __init__(self, sword):
         self.sword = sword
         self.frame = 0 # 검 대기 애니메이션 프레임 초기화
@@ -79,6 +80,8 @@ class Wield_Sword:
 
 # 검 방어 상태
 class Defence_Sword:
+    images = None
+
     def __init__(self, sword):
         self.sword = sword
         self.frame = 0 # 검 방어 애니메이션 프레임 초기화
@@ -119,7 +122,7 @@ class Sword:
         self.x, self.y = character.x + 22, character.y # 초기 위치 설정 # 검의 초기 위치
         self.image = load_image('sword/basic_sword.png') # 검의 이미지 로드
         self.last_defence_time = 0.0 # 마지막 방어 시간 초기화
-        self.defence_cooltime = 2.0
+        self.defence_cooltime = 1.5
         self.damage = 1
         self.hit_list = []
 
